@@ -1,58 +1,110 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛫 Project Perjalanan Dinas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Informasi Pengelolaan Perjalanan Dinas berbasis web **laravel**
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🛠️ Prasyarat (Prerequisites)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Sebelum memulai, pastikan perangkat Anda telah terinstal:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* [Laragon](https://laragon.org/) (termasuk PHP >= 8.1, MySQL, dan Apache/Nginx)
+* [Composer](https://getcomposer.org/)
+* [Node.js & NPM](https://nodejs.org/)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Langkah Instalasi & Setup
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Ikuti langkah-langkah di bawah ini untuk menjalankan project di lingkungan lokal:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Clone / Salin Repository
+Buka terminal (Cmder / Git Bash) di folder `C:\laragon\www\` lalu jalankan:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+cd C:\laragon\www
+git clone <URL_REPOSITORY_ANDA> perjalanan-dinas
+cd perjalanan-dinas
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Instal Dependensi PHP (Composer)
+Jalankan perintah berikut untuk menginstal seluruh dependensi Laravel:
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Salin & Konfigurasi File Environment (`.env`)
+Buat duplikasi file `.env.example` menjadi `.env`:
 
-## Code of Conduct
+```bash
+cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Buka file `.env` dan sesuaikan pengaturan database MySQL di Laragon:
 
-## Security Vulnerabilities
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=dinas_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+> **Catatan:** Pastikan Anda telah membuat database bernama `dinas_db` di MySQL/HeidiSQL Laragon.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Generate Application Key
+Generate kunci enkripsi aplikasi Laravel:
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Jalankan Migrasi & Database Seeder
+Jalankan perintah migrasi tabel beserta data awal (seeder):
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 6. Instal & Kompilasi Asset Frontend (NPM)
+Instal dependensi JavaScript/Tailwind CSS dan kompilasi asset:
+
+```bash
+npm install
+```
+
+---
+
+## 🖥️ Menjalankan Aplikasi
+
+jalankan app dengan perintah dibawah
+
+### Menggunakan composer (agar running dua duanya)
+1. Jalankan server lokal Laravel:
+   ```bash
+   composer run dev
+   ```
+2. Akses di browser melalui URL: `http://127.0.0.1:8000`
+
+---
+
+## Akun Default (Login)
+
+Setelah seeder berhasil dijalankan, Anda dapat login menggunakan kredensial default berikut:
+
+* **Email:** `user@gmail.com`
+* **Password:** `password`
+
+---
+
+## 💻 Perintah Penting Selama Pengembangan
+
+* **Reset Database dan Isikan Ulang Seeder:**
+  ```bash
+  php artisan migrate:fresh --seed
+  ```
+* **Clear Cache Aplikasi:**
+  ```bash
+  php artisan optimize:clear
+  ```
