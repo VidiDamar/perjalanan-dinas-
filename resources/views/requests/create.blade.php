@@ -1,8 +1,36 @@
 <x-app-travel-layout>
-    <!-- Header Title & Subtitle -->
+    <!-- Header Title & Step Indicator -->
     <div class="mb-6">
-        <h1 class="text-2xl md:text-[28px] font-bold text-slate-900 tracking-tight">Request Center</h1>
-        <p class="text-sm text-slate-500 font-medium mt-1">Review and manage pending travel requests.</p>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <div>
+                <h1 class="text-2xl md:text-[28px] font-bold text-slate-900 tracking-tight">Ajukan Perjalanan Dinas Baru</h1>
+                <p class="text-sm text-slate-500 font-medium mt-1">Lengkapi rincian agenda tugas dinas, akomodasi, dan estimasi biaya operasional Anda.</p>
+            </div>
+            <a href="{{ route('requests.index') }}" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 shadow-2xs transition self-start sm:self-auto">
+                <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                <span>Kembali</span>
+            </a>
+        </div>
+
+        <!-- 3-Step Simple Progress Indicator -->
+        <div class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-2xs">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div class="flex items-center gap-2.5 text-[#0A2558] font-bold">
+                    <div class="w-6 h-6 rounded-full bg-[#0A2558] text-white flex items-center justify-center text-[11px]">1</div>
+                    <span>1. Detail Tujuan & Jadwal</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-slate-500 font-medium sm:border-l sm:border-slate-100 sm:pl-3">
+                    <div class="w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-[11px]">2</div>
+                    <span>2. Estimasi Biaya & Uang Muka</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-slate-500 font-medium sm:border-l sm:border-slate-100 sm:pl-3">
+                    <div class="w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-[11px]">3</div>
+                    <span>3. Dokumen / Surat Undangan</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <form action="#" method="POST" onsubmit="event.preventDefault();" class="space-y-6">
@@ -204,13 +232,16 @@
             </div>
         </div>
 
-        <!-- Footer Action Buttons (Back & Submit Request) -->
+        <!-- Footer Action Buttons (Batal, Simpan Draf & Kirim Pengajuan) -->
         <div class="pt-2 flex items-center justify-end gap-3">
             <a href="{{ route('requests.index') }}" class="px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 shadow-2xs transition">
-                Back
+                Batal
             </a>
+            <button type="button" class="px-5 py-2.5 text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 rounded-xl transition">
+                Simpan Draf
+            </button>
             <button type="submit" class="px-6 py-2.5 text-sm font-semibold text-white bg-[#0A2558] hover:bg-[#081c42] rounded-xl shadow-xs transition duration-150 active:scale-[0.99]">
-                Submit Request
+                Kirim Pengajuan SPPD
             </button>
         </div>
     </form>

@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('requests.index');
+    return view('dashboard');
 });
 
 Route::get('/requests', function () {
@@ -18,7 +18,7 @@ Route::get('/requests/create', function () {
 Route::get('/requests/TRQ-2023-0891', function () {
     return view('requests.show');
 })->name('requests.show');
-
+    
 Route::get('/approvals', function () {
     return view('approvals.index');
 })->name('approvals.index');

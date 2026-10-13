@@ -68,17 +68,17 @@
                         <div class="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-5">
                             <!-- Full Name -->
                             <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Full Name</label>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Nama Lengkap</label>
                                 <input 
                                     type="text" 
-                                    value="Muhamad Fiqri Abdullah" 
+                                    value="Budi Santoso" 
                                     class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 font-medium focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 transition shadow-2xs"
                                 />
                             </div>
 
                             <!-- Employee ID -->
                             <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Employee ID</label>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1.5">NIP / ID Pegawai</label>
                                 <input 
                                     type="text" 
                                     value="EMP-2023-084" 
@@ -88,11 +88,11 @@
 
                             <!-- Department Dropdown -->
                             <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Department</label>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Departemen</label>
                                 <div class="relative">
                                     <select class="w-full appearance-none bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 font-medium focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 cursor-pointer pr-10 shadow-2xs">
-                                        <option selected>Operations</option>
-                                        <option>Engineering</option>
+                                        <option>Operations</option>
+                                        <option selected>Engineering</option>
                                         <option>Sales</option>
                                         <option>Marketing</option>
                                         <option>Finance</option>
@@ -107,10 +107,10 @@
 
                             <!-- Email Address -->
                             <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Email Address</label>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Alamat Email Kantor</label>
                                 <input 
                                     type="email" 
-                                    value="mhmdfqruabduloh@gmail.com" 
+                                    value="budi.santoso@jayaabadi.co.id" 
                                     class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 font-medium focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 transition shadow-2xs"
                                 />
                             </div>

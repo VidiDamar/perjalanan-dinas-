@@ -1,8 +1,8 @@
 <x-app-travel-layout>
     <!-- Header Title & Subtitle -->
     <div class="mb-6">
-        <h1 class="text-2xl md:text-[28px] font-bold text-slate-900 tracking-tight">Approval Center</h1>
-        <p class="text-sm text-slate-500 font-medium mt-1">Review and manage pending travel requests.</p>
+        <h1 class="text-2xl md:text-[28px] font-bold text-slate-900 tracking-tight">Status Persetujuan & Verifikasi</h1>
+        <p class="text-sm text-slate-500 font-medium mt-1">Pantau alur verifikasi atasan, persetujuan keuangan, dan status permohonan dinas Anda.</p>
     </div>
 
     <!-- Main Grid 2 Kolom (Kiri: Pending Reviews List | Kanan: Detail & Action Approval) -->
@@ -41,52 +41,6 @@
                                 <span>Jakarta &rarr; Surabaya</span>
                             </div>
                             <span class="font-bold text-[#0A2558]">Rp 4.500.000</span>
-                        </div>
-                    </div>
-
-                    <!-- Item 2: TRV-2023-0892 -->
-                    <div 
-                        @click="selectedId = 'TRV-2023-0892'"
-                        class="p-4 rounded-xl border border-slate-200/80 bg-white hover:border-slate-300 cursor-pointer transition shadow-2xs"
-                    >
-                        <div class="flex items-center justify-between text-xs mb-1">
-                            <span class="text-slate-400 font-medium">TRV-2023-0892</span>
-                            <span class="text-slate-400 text-[11px] bg-slate-100 px-1.5 py-0.5 rounded">5 hrs ago</span>
-                        </div>
-                        <div class="font-bold text-slate-900 text-sm">Abdullah</div>
-                        <div class="text-xs text-slate-500 mt-0.5">Annual Sales Conference</div>
-                        <div class="flex items-center justify-between text-xs mt-3 pt-2 border-t border-slate-100">
-                            <div class="flex items-center gap-1.5 text-slate-500 font-medium">
-                                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                </svg>
-                                <span>Jakarta &rarr; Bali</span>
-                            </div>
-                            <span class="font-bold text-[#0A2558]">Rp 8.200.000</span>
-                        </div>
-                    </div>
-
-                    <!-- Item 3: TRV-2023-0895 -->
-                    <div 
-                        @click="selectedId = 'TRV-2023-0895'"
-                        class="p-4 rounded-xl border border-slate-200/80 bg-white hover:border-slate-300 cursor-pointer transition shadow-2xs"
-                    >
-                        <div class="flex items-center justify-between text-xs mb-1">
-                            <span class="text-slate-400 font-medium">TRV-2023-0895</span>
-                            <span class="text-slate-400 text-[11px] bg-slate-100 px-1.5 py-0.5 rounded">1 day ago</span>
-                        </div>
-                        <div class="font-bold text-slate-900 text-sm truncate max-w-[190px]">Firmansyahhhhhhhhhh</div>
-                        <div class="text-xs text-slate-500 mt-0.5">Site Inspection Factory C</div>
-                        <div class="flex items-center justify-between text-xs mt-3 pt-2 border-t border-slate-100">
-                            <div class="flex items-center gap-1.5 text-slate-500 font-medium">
-                                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                </svg>
-                                <span>Bandung &rarr; Semarang</span>
-                            </div>
-                            <span class="font-bold text-[#0A2558]">Rp 2.100.000</span>
                         </div>
                     </div>
                 </div>
@@ -265,18 +219,6 @@
                     <a href="{{ route('requests.index') }}" class="px-5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-2xs transition">
                         Back
                     </a>
-
-                    <div class="flex items-center gap-3">
-                        <button type="button" class="px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition shadow-2xs">
-                            Request Revision
-                        </button>
-                        <button type="button" class="px-5 py-2 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg shadow-2xs transition">
-                            Reject
-                        </button>
-                        <button type="button" class="px-6 py-2 text-xs font-semibold text-white bg-[#0A2558] hover:bg-[#071d47] rounded-lg shadow-2xs transition">
-                            Approve
-                        </button>
-                    </div>
                 </div>
 
             </div>
