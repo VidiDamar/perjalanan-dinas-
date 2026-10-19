@@ -2,15 +2,8 @@
     <div class="flex flex-col gap-6">
         <!-- Logo & Brand Header -->
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-1 py-1 group">
-            <div class="w-10 h-10 rounded-xl border border-sky-200 bg-sky-50 flex items-center justify-center p-2 shadow-2xs group-hover:bg-sky-100 transition">
-                <svg class="w-full h-full text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="m4.93 4.93 4.24 4.24" />
-                    <path d="m14.83 9.17 4.24-4.24" />
-                    <path d="m14.83 14.83 4.24 4.24" />
-                    <path d="m9.17 14.83-4.24 4.24" />
-                    <circle cx="12" cy="12" r="4" />
-                </svg>
+            <div class="w-12.5 h-auto rounded-xl flex items-center justify-center p-2 shadow-2xs">
+               <img src="/logo_perusahaan.png" alt="logo">
             </div>
             <div class="flex flex-col">
                 <span class="font-bold text-[17px] text-[#0F2851] tracking-tight leading-snug">Jaya Abadi</span>
