@@ -1,228 +1,167 @@
 <x-app-travel-layout>
     <!-- Header Title & Subtitle -->
     <div class="mb-6">
-        <h1 class="text-2xl md:text-[28px] font-bold text-slate-900 tracking-tight">Status Persetujuan & Verifikasi</h1>
-        <p class="text-sm text-slate-500 font-medium mt-1">Pantau alur verifikasi atasan, persetujuan keuangan, dan status permohonan dinas Anda.</p>
+        <h1 class="text-2xl md:text-[28px] font-bold text-slate-900 tracking-tight">Status Persetujuan & Verifikasi SPPD</h1>
+        <p class="text-sm text-slate-500 font-medium mt-1">Pantau alur verifikasi atasan, penerbitan tiket oleh Travel Desk, dan pencairan uang muka dinas Anda secara real-time.</p>
     </div>
 
-    <!-- Main Grid 2 Kolom (Kiri: Pending Reviews List | Kanan: Detail & Action Approval) -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start" x-data="{
-        selectedId: 'TRV-2023-0891'
-    }">
-        
-        <!-- KOLOM KIRI (1 Col Span: Pending Reviews List) -->
+    <!-- Main Grid 2 Kolom (Kiri: List SPPD Saya | Kanan: Detail & Timeline Approval) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <!-- KOLOM KIRI (1 Col Span) -->
         <div class="lg:col-span-1 flex flex-col gap-4">
             <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="font-bold text-slate-900 text-base">Pending Reviews</h2>
-                    <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-[#FEF3C7] text-[#D97706]">
-                        3 Requests
+                    <h2 class="font-bold text-slate-900 text-sm">Daftar Pengajuan Saya</h2>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-sky-50 text-sky-700 border border-sky-100">
+                        {{ $requests->count() }} Pengajuan
                     </span>
                 </div>
 
                 <div class="space-y-3">
-                    <!-- Item 1: TRV-2023-0891 (Selected Active) -->
-                    <div 
-                        @click="selectedId = 'TRV-2023-0891'"
-                        class="p-4 rounded-xl border border-slate-200 bg-white hover:border-[#0A2558] cursor-pointer transition relative before:absolute before:left-0 before:top-3 before:bottom-3 before:w-1 before:bg-[#0A2558] before:rounded-r shadow-2xs"
-                    >
-                        <div class="flex items-center justify-between text-xs mb-1">
-                            <span class="text-slate-400 font-medium">TRV-2023-0891</span>
-                            <span class="text-slate-400 text-[11px] bg-slate-100 px-1.5 py-0.5 rounded">2 hrs ago</span>
-                        </div>
-                        <div class="font-bold text-slate-900 text-sm">Eko Widodo</div>
-                        <div class="text-xs text-slate-500 mt-0.5">Client Meeting - TechCorp Infra</div>
-                        <div class="flex items-center justify-between text-xs mt-3 pt-2 border-t border-slate-100">
-                            <div class="flex items-center gap-1.5 text-slate-500 font-medium">
-                                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                </svg>
-                                <span>Jakarta &rarr; Surabaya</span>
+                    @forelse($requests as $req)
+                        <a 
+                            href="{{ route('approvals.index', ['id' => $req->id]) }}"
+                            class="block p-4 rounded-xl border transition relative shadow-2xs {{ $selectedTrip?->id === $req->id ? 'border-[#0A2558] bg-slate-50/50 ring-1 ring-[#0A2558]/20 before:absolute before:left-0 before:top-3 before:bottom-3 before:w-1 before:bg-[#0A2558] before:rounded-r' : 'border-slate-200/80 bg-white hover:border-slate-300' }}"
+                        >
+                            <div class="flex items-center justify-between text-xs mb-1">
+                                <span class="font-mono font-bold text-[#0A2558]">{{ $req->request_number }}</span>
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border {{ $req->status_badge_class }}">
+                                    {{ $req->status_label }}
+                                </span>
                             </div>
-                            <span class="font-bold text-[#0A2558]">Rp 4.500.000</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- KOLOM KANAN (2 Col Span: Review Detail Panel) -->
-        <div class="lg:col-span-2">
-            <div class="bg-white rounded-2xl border border-slate-200/90 p-6 md:p-8 shadow-xs">
-                
-                <!-- Detail Header -->
-                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-100">
-                    <div>
-                        <div class="flex items-center gap-3">
-                            <h2 class="text-xl md:text-2xl font-bold text-[#0A2558]">Client Meeting - TechCorp Infra</h2>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-[#FEF3C7] text-[#B45309]">
-                                Pending Approval
-                            </span>
-                        </div>
-                        <p class="text-xs text-slate-400 font-medium mt-1">
-                            Request ID: TRV-2023-0891 &bull; Submitted on 24 Oct 2023
-                        </p>
-                    </div>
-
-                    <div class="text-right shrink-0">
-                        <div class="text-[10px] uppercase font-bold tracking-wider text-slate-400">TOTAL REQUESTED</div>
-                        <div class="text-2xl md:text-3xl font-extrabold text-[#0A2558]">
-                            <span class="text-base font-bold align-top">Rp </span>4.500.000
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2 Cards Info: Employee Details & Itinerary Summary -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-6">
-                    <!-- Card Employee Details -->
-                    <div class="p-5 rounded-xl border border-slate-200/80 bg-white">
-                        <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-4">
-                            EMPLOYEE DETAILS
-                        </div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-11 h-11 rounded-full overflow-hidden bg-slate-200 shrink-0">
-                                <img 
-                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" 
-                                    alt="Eko Widodo" 
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div>
-                                <div class="font-bold text-slate-800 text-sm">Eko Widodo</div>
-                                <div class="text-xs text-slate-500">Senior Sales Engineer</div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-1.5 text-xs">
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Department:</span>
-                                <span class="font-semibold text-slate-800">Enterprise Sales</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Cost Center:</span>
-                                <span class="font-semibold text-slate-800">CC-SAL-004</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card Itinerary Summary -->
-                    <div class="p-5 rounded-xl border border-slate-200/80 bg-white">
-                        <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-4">
-                            ITINERARY SUMMARY
-                        </div>
-
-                        <div class="relative pl-5 space-y-4 before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-[1.5px] before:bg-slate-200">
-                            <!-- Departure -->
-                            <div class="relative">
-                                <div class="absolute -left-[18.5px] top-1 w-2.5 h-2.5 rounded-full bg-[#0A2558]"></div>
-                                <div class="text-[11px] text-slate-500 font-medium">26 Oct 2023 - 08:00</div>
-                                <div class="font-bold text-slate-800 text-xs">Jakarta (CGK)</div>
-                            </div>
-
-                            <!-- Return -->
-                            <div class="relative">
-                                <div class="absolute -left-[18.5px] top-1 w-2.5 h-2.5 rounded-full border-2 border-[#0A2558] bg-white"></div>
-                                <div class="text-[11px] text-slate-500 font-medium">26 Oct 2023 - 18:00</div>
-                                <div class="font-bold text-slate-800 text-xs">Surabaya (SUB)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Estimated Cost Breakdown Table -->
-                <div class="mb-6">
-                    <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">
-                        ESTIMATED COST BREAKDOWN
-                    </div>
-                    <div class="border border-slate-200/80 rounded-xl overflow-hidden">
-                        <table class="w-full text-left text-xs">
-                            <thead class="text-slate-400 font-medium bg-slate-50/60 border-b border-slate-200/80">
-                                <tr>
-                                    <th class="px-5 py-3 font-normal">Category</th>
-                                    <th class="px-5 py-3 font-normal">Description</th>
-                                    <th class="px-5 py-3 font-normal text-right">Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 text-slate-700">
-                                <tr>
-                                    <td class="px-5 py-3 flex items-center gap-2 font-medium text-slate-800">
-                                        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
-                                        </svg>
-                                        <span>Flight</span>
-                                    </td>
-                                    <td class="px-5 py-3 text-slate-600">Roundtrip CGK-SUB (Garuda)</td>
-                                    <td class="px-5 py-3 text-right font-semibold text-slate-800">Rp 2.800.000</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-5 py-3 flex items-center gap-2 font-medium text-slate-800">
-                                        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-                                        </svg>
-                                        <span>Accommodation</span>
-                                    </td>
-                                    <td class="px-5 py-3 text-slate-600">2 Nights at Bumi Surabaya</td>
-                                    <td class="px-5 py-3 text-right font-semibold text-slate-800">Rp 1.400.000</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-5 py-3 flex items-center gap-2 font-medium text-slate-800">
-                                        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75m0 0a1.125 1.125 0 00-1.125-1.125H5.625a1.125 1.125 0 00-1.125 1.125v10.5" />
-                                        </svg>
-                                        <span>Transport</span>
-                                    </td>
-                                    <td class="px-5 py-3 text-slate-600">Airport Transfers</td>
-                                    <td class="px-5 py-3 text-right font-semibold text-slate-800">Rp 300.000</td>
-                                </tr>
-                            </tbody>
-                            <tfoot class="bg-slate-50/70 border-t border-slate-200/80 font-bold text-slate-800">
-                                <tr>
-                                    <td colspan="2" class="px-5 py-3 text-right">Total Estimate</td>
-                                    <td class="px-5 py-3 text-right text-[#0A2558] font-bold">Rp 4.500.000</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Workflow Status Stepper -->
-                <div class="mb-8">
-                    <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">
-                        WORKFLOW STATUS
-                    </div>
-                    <div class="p-5 rounded-xl border border-slate-200/80 bg-white">
-                        <div class="relative pl-6 space-y-5 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[1.5px] before:bg-slate-200">
-                            <!-- Step 1 Done -->
-                            <div class="relative">
-                                <div class="absolute -left-[23px] top-0.5 w-3.5 h-3.5 rounded-full bg-[#10B981] text-white flex items-center justify-center ring-2 ring-white">
-                                    <svg class="w-2 h-2" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
+                            <div class="font-bold text-slate-900 text-sm mt-1">{{ $req->purpose }}</div>
+                            <div class="flex items-center justify-between text-xs mt-3 pt-2 border-t border-slate-100">
+                                <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                                    <span>{{ $req->origin_city }} &rarr; {{ $req->destination_city }}</span>
                                 </div>
-                                <div class="font-bold text-slate-800 text-xs">Submitted by Budi Santoso</div>
-                                <div class="text-[11px] text-slate-400 mt-0.5">24 Oct 2023, 10:15 AM</div>
+                                <span class="font-bold text-[#0A2558]">Rp {{ number_format($req->total_estimated_budget, 0, ',', '.') }}</span>
                             </div>
-
-                            <!-- Step 2 In Progress -->
-                            <div class="relative">
-                                <div class="absolute -left-[23px] top-0.5 w-3.5 h-3.5 rounded-full border-2 border-amber-500 bg-white ring-2 ring-white"></div>
-                                <div class="font-bold text-slate-800 text-xs">Pending Direct Manager Approval</div>
-                                <div class="text-[11px] text-amber-600 font-medium mt-0.5">Currently with You</div>
-                            </div>
+                        </a>
+                    @empty
+                        <div class="p-6 text-center text-xs text-slate-400">
+                            Belum ada pengajuan perjalanan dinas.
                         </div>
-                    </div>
+                    @endforelse
                 </div>
-
-                <!-- Action Button Bar -->
-                <div class="flex items-center justify-between flex-wrap gap-3 pt-4 border-t border-slate-100">
-                    <a href="{{ route('requests.index') }}" class="px-5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-2xs transition">
-                        Back
-                    </a>
-                </div>
-
             </div>
         </div>
 
+        <!-- KOLOM KANAN (2 Col Span: Detail Panel & Live Multi-Level Stepper) -->
+        <div class="lg:col-span-2">
+            @if($selectedTrip)
+                <div class="bg-white rounded-2xl border border-slate-200/90 p-6 md:p-8 shadow-xs">
+                    <!-- Detail Header -->
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-100">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2.5 mb-1.5">
+                                <span class="font-mono font-bold text-sm text-[#0A2558] bg-slate-100 px-2.5 py-1 rounded">
+                                    {{ $selectedTrip->request_number }}
+                                </span>
+                                <span class="px-2.5 py-1 rounded-full text-xs font-semibold border {{ $selectedTrip->status_badge_class }}">
+                                    {{ $selectedTrip->status_label }}
+                                </span>
+                            </div>
+                            <h2 class="text-xl md:text-2xl font-bold text-slate-900">{{ $selectedTrip->purpose }}</h2>
+                            <p class="text-xs text-slate-500 mt-1">
+                                Rute: <strong>{{ $selectedTrip->origin_city }} &rarr; {{ $selectedTrip->destination_city }}</strong> &bull; Jadwal: <strong>{{ $selectedTrip->start_date->format('d M Y') }}</strong> ({{ $selectedTrip->duration_days }} Hari)
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-right">
+                            <span class="text-slate-400">Estimasi Total Biaya:</span>
+                            <div class="font-extrabold text-[#0A2558] text-base">Rp {{ number_format($selectedTrip->total_estimated_budget, 0, ',', '.') }}</div>
+                            <div class="text-[11px] text-emerald-600 font-semibold">Uang Muka: Rp {{ number_format($selectedTrip->cash_advance_requested, 0, ',', '.') }}</div>
+                        </div>
+                    </div>
+
+                    <!-- Alert Revisi jika diperlukan -->
+                    @if($selectedTrip->status === 'revision_required')
+                        <div class="my-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs">
+                            <div class="flex items-center gap-2 text-amber-800 font-bold mb-1">
+                                <span>⚠️ Catatan Revisi dari Atasan:</span>
+                            </div>
+                            <p class="text-amber-900 leading-relaxed">
+                                {{ $selectedTrip->revision_notes ?? 'Harap tinjau kembali rincian anggaran hotel dan sesuaikan dengan batas kebijakan.' }}
+                            </p>
+                        </div>
+                    @endif
+
+                    <!-- Multi-Level Workflow Visualizer -->
+                    <div class="py-6 border-b border-slate-100">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Progres Verifikasi Berjenjang</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+                            <!-- Step 1: Submit -->
+                            <div class="p-3.5 rounded-xl bg-emerald-50/80 border border-emerald-200">
+                                <div class="flex items-center gap-2 font-bold text-emerald-800">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                                    <span>1. Pengajuan</span>
+                                </div>
+                                <div class="text-[11px] text-slate-600 mt-1">Diajukan oleh Anda</div>
+                                <div class="text-[10px] text-emerald-700 font-medium">{{ $selectedTrip->created_at->format('d M Y, H:i') }} WIB</div>
+                            </div>
+
+                            <!-- Step 2: Manager Approval -->
+                            <div class="p-3.5 rounded-xl border {{ in_array($selectedTrip->status, ['approved', 'ticket_issued', 'completed']) ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800' : 'bg-amber-50/80 border-amber-300 text-amber-900' }}">
+                                <div class="flex items-center gap-2 font-bold">
+                                    <span class="w-5 h-5 rounded-full {{ in_array($selectedTrip->status, ['approved', 'ticket_issued', 'completed']) ? 'bg-emerald-500' : 'bg-amber-500' }} text-white flex items-center justify-center text-[10px]">
+                                        {{ in_array($selectedTrip->status, ['approved', 'ticket_issued', 'completed']) ? '✓' : '2' }}
+                                    </span>
+                                    <span>2. Approval Atasan</span>
+                                </div>
+                                <div class="text-[11px] mt-1">{{ $selectedTrip->approver->name ?? 'Budi Santoso' }}</div>
+                                <div class="text-[10px] font-medium">
+                                    @if($selectedTrip->approval_date)
+                                        Disetujui: {{ $selectedTrip->approval_date->format('d M Y') }}
+                                    @else
+                                        Menunggu Keputusan
+                                    @endif
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Travel Desk Booking -->
+                            <div class="p-3.5 rounded-xl border {{ $selectedTrip->pnr_code ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800' : 'bg-slate-50 border-slate-200 text-slate-500 opacity-60' }}">
+                                <div class="flex items-center gap-2 font-bold">
+                                    <span class="w-5 h-5 rounded-full {{ $selectedTrip->pnr_code ? 'bg-emerald-500 text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[10px]">
+                                        {{ $selectedTrip->pnr_code ? '✓' : '3' }}
+                                    </span>
+                                    <span>3. Tiket & Hotel</span>
+                                </div>
+                                <div class="text-[11px] mt-1">Admin Travel Desk</div>
+                                <div class="text-[10px] font-medium">
+                                    {{ $selectedTrip->pnr_code ? 'Tiket Terbit' : 'Belum Diproses' }}
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Cash Advance -->
+                            <div class="p-3.5 rounded-xl border {{ $selectedTrip->cash_advance_status === 'disbursed' ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800' : 'bg-slate-50 border-slate-200 text-slate-500 opacity-60' }}">
+                                <div class="flex items-center gap-2 font-bold">
+                                    <span class="w-5 h-5 rounded-full {{ $selectedTrip->cash_advance_status === 'disbursed' ? 'bg-emerald-500 text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[10px]">
+                                        {{ $selectedTrip->cash_advance_status === 'disbursed' ? '✓' : '4' }}
+                                    </span>
+                                    <span>4. Uang Muka</span>
+                                </div>
+                                <div class="text-[11px] mt-1">Kasir Keuangan</div>
+                                <div class="text-[10px] font-medium">
+                                    {{ $selectedTrip->cash_advance_status === 'disbursed' ? 'Sudah Ditransfer' : 'Menunggu Transfer' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Bar -->
+                    <div class="pt-6 flex items-center justify-between">
+                        <div class="text-xs text-slate-500">
+                            Surat Tugas: <strong>{{ $selectedTrip->document_name ?? 'Surat_Tugas.pdf' }}</strong>
+                        </div>
+                        <a href="{{ route('requests.show', $selectedTrip->request_number) }}" class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0A2558] hover:bg-[#081c42] text-white font-bold text-xs rounded-xl shadow-xs transition">
+                            <span>Buka Halaman Lengkap SPPD</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            @endif
+        </div>
     </div>
 </x-app-travel-layout>

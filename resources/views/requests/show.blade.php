@@ -1,4 +1,15 @@
 <x-app-travel-layout>
+    <!-- Flash Notifications -->
+    @if(session('success'))
+        <div class="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-xs">
+            <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[11px]">✓</span>
+                <span>{{ session('success') }}</span>
+            </div>
+            <button type="button" onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900 font-bold text-sm">&times;</button>
+        </div>
+    @endif
+
     <!-- Top Action / Back Button -->
     <div class="mb-4">
         <a href="{{ route('requests.index') }}" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition shadow-2xs">
@@ -9,250 +20,248 @@
         </a>
     </div>
 
-    <!-- Main Title & Action Bar -->
+    <!-- Main Title & Action Bar (Real Data) -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
-            <div class="flex items-center gap-3">
-                <h1 class="text-2xl md:text-[28px] font-bold text-[#0A2558] tracking-tight">TRQ-2023-0891</h1>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#DCFCE7] text-[#15803D] border border-[#BBF7D0]">
-                    Disetujui &bull; Siap Berangkat
+            <div class="flex flex-wrap items-center gap-3">
+                <h1 class="text-2xl md:text-[28px] font-bold text-[#0A2558] tracking-tight">{{ $trip->request_number }}</h1>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border {{ $trip->status_badge_class }}">
+                    {{ $trip->status_label }}
                 </span>
+                @if($trip->checked_in)
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                        📍 Sudah Check-in di {{ $trip->checkin_location }}
+                    </span>
+                @endif
             </div>
-            <p class="text-sm text-slate-500 font-medium mt-1">Client Meeting &mdash; TechCorp Infra &bull; Surabaya, Jawa Timur</p>
+            <p class="text-sm text-slate-500 font-medium mt-1">{{ $trip->purpose }} &bull; {{ $trip->origin_city }} &rarr; {{ $trip->destination_city }}</p>
         </div>
 
-        <div class="flex items-center gap-3">
-            <button type="button" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition shadow-2xs">
+        <div class="flex flex-wrap items-center gap-3">
+            <button type="button" onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition shadow-2xs">
                 <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                 </svg>
-                <span>Unduh Surat Tugas / SPPD</span>
+                <span>Cetak / Unduh SPPD</span>
             </button>
-            <a href="{{ route('settlements.index') }}" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-[#0A2558] hover:bg-[#081c42] rounded-xl shadow-xs transition">
-                <span>Klaim Pertanggungjawaban</span>
-            </a>
+
+            @if(in_array($trip->status, ['approved', 'ticket_issued', 'completed']))
+                <a href="{{ route('settlements.index', ['trip_id' => $trip->id]) }}" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-[#0A2558] hover:bg-[#081c42] rounded-xl shadow-xs transition">
+                    <span>Klaim Pertanggungjawaban (Settlement)</span>
+                </a>
+            @endif
         </div>
     </div>
 
-    <!-- Grid 2 Kolom (Kiri: Itinerary & Expenses | Kanan: Traveler, Timeline, Documents) -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        
+    <!-- Grid 2 Kolom (Kiri: Itinerary & Expenses | Kanan: Timeline, Documents, Traveler) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start mb-12">
         <!-- KOLOM KIRI (2 Col Span) -->
         <div class="lg:col-span-2 flex flex-col gap-6">
-            
-            <!-- Card 1: Itinerary Details -->
+            <!-- Card 1: Itinerary & Tickets Details -->
             <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs">
-                <div class="flex items-center gap-2.5 text-[#0A2558] font-bold text-lg mb-6">
-                    <svg class="w-5 h-5 text-[#0A2558]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
-                    </svg>
-                    <span>Jadwal & Tiket Perjalanan</span>
-                </div>
-
-                <!-- Timeline Flight List -->
-                <div class="relative pl-6 space-y-8 before:absolute before:left-2 before:top-2.5 before:bottom-3 before:w-[2px] before:bg-slate-200">
-                    <!-- Departure -->
-                    <div class="relative">
-                        <div class="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-[#0A2558] ring-4 ring-white"></div>
-                        <div class="text-[11px] font-semibold text-slate-400 tracking-wider uppercase mb-0.5">
-                            KEBERANGKATAN &bull; 26 OKT 2023
-                        </div>
-                        <div class="font-bold text-slate-800 text-[15px]">
-                            Jakarta (CGK) &rarr; Surabaya (SUB)
-                        </div>
-                        <div class="text-xs text-slate-500 font-medium mt-0.5">
-                            Garuda Indonesia GA-312 &bull; 08:30 WIB (Terminal 3)
-                        </div>
-                    </div>
-
-                    <!-- Return -->
-                    <div class="relative">
-                        <div class="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full bg-[#0A2558] ring-4 ring-white"></div>
-                        <div class="text-[11px] font-semibold text-slate-400 tracking-wider uppercase mb-0.5">
-                            KEPULANGAN &bull; 28 OKT 2023
-                        </div>
-                        <div class="font-bold text-slate-800 text-[15px]">
-                            Surabaya (SUB) &rarr; Jakarta (CGK)
-                        </div>
-                        <div class="text-xs text-slate-500 font-medium mt-0.5">
-                            Garuda Indonesia GA-325 &bull; 16:45 WIB (Juanda T1)
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 2: Estimated Expenses -->
-            <div class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs">
-                <div class="p-6 pb-4">
+                <div class="flex items-center justify-between mb-6 pb-2 border-b border-slate-100">
                     <div class="flex items-center gap-2.5 text-[#0A2558] font-bold text-lg">
-                        <svg class="w-5 h-5 text-[#0A2558]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect width="20" height="14" x="2" y="5" rx="2" />
-                            <line x1="2" x2="22" y1="10" y2="10" />
-                            <circle cx="12" cy="15" r="2" />
+                        <svg class="w-5 h-5 text-[#0A2558]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
                         </svg>
-                        <span>Estimasi Biaya & Uang Muka Dinas</span>
+                        <span>Jadwal & Reservasi Tiket</span>
+                    </div>
+
+                    @if($trip->pnr_code)
+                        <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-sky-50 text-sky-800 border border-sky-200">
+                            PNR: {{ $trip->pnr_code }}
+                        </span>
+                    @endif
+                </div>
+
+                <div class="space-y-6 text-xs">
+                    <!-- Keberangkatan -->
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="p-2.5 bg-sky-100 text-[#0A2558] rounded-xl text-lg">
+                            ✈️
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 text-sm">Transportasi Dinas: {{ $trip->transport_mode }}</span>
+                                <span class="font-semibold text-slate-500">{{ $trip->start_date->format('d M Y') }}</span>
+                            </div>
+                            <div class="text-slate-700 font-medium mt-1">
+                                {{ $trip->origin_city }} &rarr; {{ $trip->destination_city }}
+                            </div>
+                            @if($trip->flight_departure_info)
+                                <div class="text-[11px] text-[#0A2558] font-bold mt-1">
+                                    {{ $trip->flight_departure_info }}
+                                </div>
+                            @endif
+                            @if($trip->e_ticket_number)
+                                <div class="text-[11px] text-slate-500 font-mono mt-0.5">
+                                    No. Tiket: {{ $trip->e_ticket_number }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Akomodasi Hotel -->
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="p-2.5 bg-amber-100 text-amber-800 rounded-xl text-lg">
+                            🏨
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 text-sm">Akomodasi Penginapan</span>
+                                <span class="font-semibold text-slate-500">{{ max(1, $trip->duration_days - 1) }} Malam</span>
+                            </div>
+                            <div class="text-slate-800 font-semibold mt-1">
+                                {{ $trip->hotel_name ?? 'Hotel Rekanan (Diproses Travel Desk)' }}
+                            </div>
+                            @if($trip->hotel_room_type)
+                                <div class="text-[11px] text-slate-500 mt-0.5">
+                                    Tipe Kamar: {{ $trip->hotel_room_type }}
+                                </div>
+                            @endif
+                            @if($trip->hotel_confirmation_code)
+                                <div class="text-[11px] text-emerald-700 font-bold font-mono mt-0.5">
+                                    Kode Reservasi: {{ $trip->hotel_confirmation_code }}
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
-                <!-- Table Expenses -->
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm">
-                        <thead class="text-xs text-slate-400 font-medium border-b border-slate-100">
-                            <tr>
-                                <th class="px-6 py-3 font-normal">Kategori</th>
-                                <th class="px-6 py-3 font-normal">Keterangan</th>
-                                <th class="px-6 py-3 font-normal text-right">Jumlah (IDR)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 text-slate-700">
-                            <!-- Flight -->
-                            <tr>
-                                <td class="px-6 py-4 flex items-center gap-2.5 font-medium text-slate-800">
-                                    <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
-                                    </svg>
-                                    <span>Tiket Pesawat</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-600">Tiket PP CGK - SUB (Garuda)</td>
-                                <td class="px-6 py-4 font-semibold text-slate-800 text-right">3.500.000</td>
-                            </tr>
-                            <!-- Accommodation -->
-                            <tr>
-                                <td class="px-6 py-4 flex items-center gap-2.5 font-medium text-slate-800">
-                                    <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-                                    </svg>
-                                    <span>Akomodasi / Hotel</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-600">2 Malam di JW Marriott Surabaya</td>
-                                <td class="px-6 py-4 font-semibold text-slate-800 text-right">2.800.000</td>
-                            </tr>
-                            <!-- Transport -->
-                            <tr>
-                                <td class="px-6 py-4 flex items-center gap-2.5 font-medium text-slate-800">
-                                    <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75m0 0a1.125 1.125 0 00-1.125-1.125H5.625a1.125 1.125 0 00-1.125 1.125v10.5" />
-                                    </svg>
-                                    <span>Transportasi Lokal</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-600">Antar-jemput Bandara & Taksi Kota</td>
-                                <td class="px-6 py-4 font-semibold text-slate-800 text-right">500.000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Total Estimate Footer -->
-                <div class="bg-[#F8FAFC]/80 px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-12">
-                    <span class="text-sm font-semibold text-slate-700">Total Estimasi</span>
-                    <span class="text-lg md:text-xl font-bold text-[#0A2558]">Rp 6.800.000</span>
-                </div>
+                <!-- Check-in Action Bar -->
+                @if(in_array($trip->status, ['approved', 'ticket_issued']) && ! $trip->checked_in)
+                    <div class="mt-6 p-4 rounded-xl bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                        <div>
+                            <span class="font-bold text-sky-900">Sudah tiba di kota tujuan?</span>
+                            <p class="text-slate-500 mt-0.5">Tekan tombol check-in untuk konfirmasi keselamatan dan update posisi di radar monitoring dinas.</p>
+                        </div>
+                        <form action="{{ route('requests.checkin', $trip->request_number) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="location" value="{{ $trip->hotel_name ?? $trip->destination_city }}">
+                            <button type="submit" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl shadow-xs transition">
+                                <span>📍 Check-in Sekarang</span>
+                            </button>
+                        </form>
+                    </div>
+                @endif
             </div>
 
+            <!-- Card 2: Expense Breakdown -->
+            <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs">
+                <h3 class="text-base font-bold text-[#0A2558] mb-4">Rincian Anggaran Perjalanan</h3>
+                <div class="space-y-3 text-xs">
+                    <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                        <span class="text-slate-600">Estimasi Tiket Transportasi</span>
+                        <span class="font-bold text-slate-900">Rp {{ number_format($trip->estimated_transport, 0, ',', '.') }}</span>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                        <span class="text-slate-600">Estimasi Akomodasi Hotel</span>
+                        <span class="font-bold text-slate-900">Rp {{ number_format($trip->estimated_hotel, 0, ',', '.') }}</span>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                        <span class="text-slate-600">Uang Harian / Per Diem ({{ $trip->duration_days }} Hari)</span>
+                        <span class="font-bold text-slate-900">Rp {{ number_format($trip->estimated_per_diem, 0, ',', '.') }}</span>
+                    </div>
+                    @if($trip->estimated_other > 0)
+                        <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                            <span class="text-slate-600">Biaya Operasional Lainnya</span>
+                            <span class="font-bold text-slate-900">Rp {{ number_format($trip->estimated_other, 0, ',', '.') }}</span>
+                        </div>
+                    @endif
+                    <div class="flex justify-between items-center pt-2 text-base font-extrabold text-[#0A2558]">
+                        <span>Total Anggaran:</span>
+                        <span>Rp {{ number_format($trip->total_estimated_budget, 0, ',', '.') }}</span>
+                    </div>
+                </div>
+
+                @if($trip->cash_advance_requested > 0)
+                    <div class="mt-4 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs flex items-center justify-between">
+                        <div>
+                            <span class="text-slate-500 font-medium">Uang Muka / Kasbon Dicairkan:</span>
+                            <div class="font-bold text-emerald-700 text-sm">Rp {{ number_format($trip->cash_advance_requested, 0, ',', '.') }}</div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">
+                            {{ $trip->cash_advance_status === 'disbursed' ? 'Sudah Ditransfer Kasir' : 'Dalam Proses Transfer' }}
+                        </span>
+                    </div>
+                @endif
+            </div>
         </div>
 
         <!-- KOLOM KANAN (1 Col Span) -->
         <div class="flex flex-col gap-6">
-            
-            <!-- Card 1: Traveler -->
-            <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs">
-                <div class="flex items-center gap-2 text-slate-800 font-bold text-[15px] mb-4">
-                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>
-                    <span>Pegawai Ditugaskan</span>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-lg bg-[#E0E7FF] text-[#3730A3] flex items-center justify-center font-bold text-sm tracking-wider shadow-xs">
-                        BS
+            <!-- Traveler Profile Card -->
+            <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs text-xs">
+                <h4 class="font-bold text-slate-900 text-sm mb-3">Informasi Pelaksana Tugas</h4>
+                <div class="space-y-2 text-slate-600">
+                    <div>
+                        <span class="text-slate-400">Nama Pegawai:</span>
+                        <div class="font-bold text-slate-900 text-sm">{{ $trip->user->name }}</div>
                     </div>
                     <div>
-                        <div class="font-bold text-slate-800 text-[15px]">Budi Santoso</div>
-                        <div class="text-xs text-slate-500 font-medium">Senior Engineer &bull; NIP: EMP-2023-084</div>
+                        <span class="text-slate-400">NIK & Divisi:</span>
+                        <div class="font-semibold text-slate-800">{{ $trip->user->employee_id ?? 'EMP-0921' }} &bull; {{ $trip->user->department ?? 'Engineering' }}</div>
+                    </div>
+                    <div>
+                        <span class="text-slate-400">Atasan Penyetuju:</span>
+                        <div class="font-semibold text-slate-800">{{ $trip->approver->name ?? 'Budi Santoso' }}</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 2: Approval Timeline -->
-            <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs">
-                <div class="flex items-center gap-2 text-slate-800 font-bold text-[15px] mb-5">
-                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Alur Persetujuan & Status SPPD</span>
-                </div>
-
-                <div class="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[2px] before:bg-[#22C55E]/30">
-                    <!-- Step 1 -->
+            <!-- Approval Timeline Card -->
+            <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs text-xs">
+                <h4 class="font-bold text-slate-900 text-sm mb-4">Jejak Status Approval</h4>
+                <div class="relative pl-6 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-200">
+                    <!-- Step 1: Submit -->
                     <div class="relative">
-                        <div class="absolute -left-[27px] top-0.5 w-4 h-4 rounded-full bg-[#10B981] text-white flex items-center justify-center ring-4 ring-white shadow-xs">
-                            <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                            </svg>
-                        </div>
-                        <div class="font-semibold text-slate-800 text-xs">Pengajuan oleh Pegawai</div>
-                        <div class="text-[11px] text-slate-500 mt-0.5">Budi Santoso &bull; 10 Okt, 09:15 WIB</div>
+                        <div class="absolute -left-[23px] top-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-white"></div>
+                        <div class="font-bold text-slate-900">Diajukan oleh Karyawan</div>
+                        <div class="text-[11px] text-slate-400">{{ $trip->created_at->format('d M Y, H:i') }} WIB</div>
                     </div>
 
-                    <!-- Step 2 -->
+                    <!-- Step 2: Approval -->
                     <div class="relative">
-                        <div class="absolute -left-[27px] top-0.5 w-4 h-4 rounded-full bg-[#10B981] text-white flex items-center justify-center ring-4 ring-white shadow-xs">
-                            <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                            </svg>
-                        </div>
-                        <div class="font-semibold text-slate-800 text-xs">Persetujuan Atasan Langsung</div>
-                        <div class="text-[11px] text-slate-500 mt-0.5">Siti Aminah &bull; 11 Okt, 14:30 WIB</div>
+                        <div class="absolute -left-[23px] top-0.5 w-3 h-3 rounded-full {{ in_array($trip->status, ['approved', 'ticket_issued', 'completed']) ? 'bg-emerald-500' : 'bg-amber-400' }} ring-4 ring-white"></div>
+                        <div class="font-bold text-slate-900">Persetujuan Atasan (Manager)</div>
+                        @if($trip->approval_date)
+                            <div class="text-[11px] text-emerald-700 font-semibold">{{ $trip->approval_date->format('d M Y, H:i') }} WIB &bull; Disetujui</div>
+                        @else
+                            <div class="text-[11px] text-amber-700 font-medium">Dalam peninjauan {{ $trip->approver->name ?? 'Atasan' }}</div>
+                        @endif
                     </div>
 
-                    <!-- Step 3 -->
+                    <!-- Step 3: Ticket Fulfillment -->
                     <div class="relative">
-                        <div class="absolute -left-[27px] top-0.5 w-4 h-4 rounded-full bg-[#10B981] text-white flex items-center justify-center ring-4 ring-white shadow-xs">
-                            <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                            </svg>
+                        <div class="absolute -left-[23px] top-0.5 w-3 h-3 rounded-full {{ $trip->pnr_code ? 'bg-emerald-500' : 'bg-slate-300' }} ring-4 ring-white"></div>
+                        <div class="font-bold text-slate-900">Penerbitan Tiket & Hotel</div>
+                        <div class="text-[11px] text-slate-500">
+                            {{ $trip->pnr_code ? 'E-Tiket terbit oleh Travel Desk' : 'Menunggu pemrosesan booking' }}
                         </div>
-                        <div class="font-semibold text-slate-800 text-xs">Verifikasi Finance & Penerbitan SPPD</div>
-                        <div class="text-[11px] text-slate-500 mt-0.5">Agus Pratama &bull; 12 Okt, 10:00 WIB</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 3: Documents -->
-            <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs">
-                <div class="flex items-center gap-2 text-slate-800 font-bold text-[15px] mb-4">
-                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.373L8.552 18.32a1.5 1.5 0 01-2.121-2.121l7.693-7.693" />
-                    </svg>
-                    <span>Dokumen Surat Tugas & Tiket</span>
-                </div>
-
-                <!-- Document Item -->
-                <div class="flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50/70 transition group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-red-50 text-red-500 flex items-center justify-center shrink-0">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
-                            </svg>
-                        </div>
-                        <div class="overflow-hidden">
-                            <div class="font-semibold text-slate-800 text-xs truncate max-w-[140px] md:max-w-[160px]">
-                                Surat_Tugas_Budi.pdf
-                            </div>
-                            <div class="text-[11px] text-slate-400 mt-0.5">245 KB &bull; PDF</div>
+            <!-- Documents Download Card -->
+            <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs text-xs">
+                <h4 class="font-bold text-slate-900 text-sm mb-3">Dokumen Terlampir</h4>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="p-1.5 bg-rose-100 text-rose-700 rounded-lg">📄</span>
+                        <div>
+                            <div class="font-bold text-slate-800 truncate max-w-[150px]">{{ $trip->document_name ?? 'Surat_Tugas_Dinas.pdf' }}</div>
+                            <div class="text-[10px] text-slate-400">Berkas Pendukung Resmi</div>
                         </div>
                     </div>
-                    
-                    <button type="button" class="p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition" title="Download Document">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                        </svg>
-                    </button>
+                    @if($trip->document_path)
+                        <a href="{{ asset('storage/' . $trip->document_path) }}" target="_blank" class="px-2.5 py-1 bg-white border border-slate-200 rounded text-[11px] font-bold text-[#0A2558] hover:bg-slate-100">
+                            Unduh
+                        </a>
+                    @else
+                        <span class="text-[11px] text-slate-400">PDF Terverifikasi</span>
+                    @endif
                 </div>
             </div>
-
         </div>
-
     </div>
 </x-app-travel-layout>
