@@ -6,7 +6,8 @@ Dokumen ini menjelaskan cara menggunakan aplikasi web **Corporate Travel Managem
 
 ## 1. Cara Membuka Aplikasi & Kredensial Login
 
-Buka aplikasi melalui browser (misal `http://localhost:8000` atau URL Laragon Anda), lalu masuk melalui halaman `/login` menggunakan salah satu akun berikut (seluruh akun menggunakan kata sandi **`password123`**):
+- **Landing Page Dashboard (`http://localhost:8000/`)**: Menampilkan penjelasan interaktif mengenai arsitektur Dashboard CTMS PT Jaya Abadi, anatomi indikator KPI untuk setiap peran, serta alur kerja *end-to-end* SPPD.
+- **Halaman Login (`http://localhost:8000/login`)**: Masuk menggunakan salah satu akun berikut (seluruh akun menggunakan kata sandi **`password123`**, atau gunakan tombol **Quick Fill Akun Demo** langsung di bawah tombol Login):
 
 | Role / Peran | Nama Pengguna | Email Login | Password | Halaman Utama |
 | :--- | :--- | :--- | :--- | :--- |

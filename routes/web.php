@@ -14,8 +14,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Home route
-Route::get('/', [UserDashboardController::class, 'index']);
+// Home Landing Page (explaining the CTMS Dashboard ecosystem)
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
 
 // Quick Role Switcher for development & demo purposes
 Route::get('/switch-role/{role}', function (string $role) {
