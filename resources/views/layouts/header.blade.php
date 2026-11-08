@@ -59,19 +59,8 @@
         />
     </form>
 
-    <!-- Right: Enterprise Workspace Switcher & User Actions -->
+    <!-- Right: User Actions -->
     <div class="flex items-center gap-3">
-        <!-- Contextual Portal Switcher (Visible in Demo or Super Admin mode) -->
-        @if(!auth()->check() || auth()->user()->role === 'admin')
-            <div class="hidden xl:flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 text-[11px] font-semibold">
-                <a href="{{ route('dashboard') }}" class="px-2.5 py-1 rounded-md transition {{ $currentRole === 'user' ? 'bg-white text-[#0A2558] shadow-2xs font-bold' : 'text-slate-600 hover:text-slate-900' }}">Pegawai</a>
-                <a href="{{ route('approver.dashboard') }}" class="px-2.5 py-1 rounded-md transition {{ $currentRole === 'approver' ? 'bg-white text-[#0A2558] shadow-2xs font-bold' : 'text-slate-600 hover:text-slate-900' }}">Atasan</a>
-                <a href="{{ route('travel-admin.dashboard') }}" class="px-2.5 py-1 rounded-md transition {{ $currentRole === 'travel_admin' ? 'bg-white text-[#0A2558] shadow-2xs font-bold' : 'text-slate-600 hover:text-slate-900' }}">Travel Desk</a>
-                <a href="{{ route('finance.dashboard') }}" class="px-2.5 py-1 rounded-md transition {{ $currentRole === 'finance' ? 'bg-white text-[#0A2558] shadow-2xs font-bold' : 'text-slate-600 hover:text-slate-900' }}">Finance</a>
-                <a href="{{ route('admin.dashboard') }}" class="px-2.5 py-1 rounded-md transition {{ $currentRole === 'admin' ? 'bg-white text-[#0A2558] shadow-2xs font-bold' : 'text-slate-600 hover:text-slate-900' }}">Admin</a>
-            </div>
-        @endif
-
         <!-- Active Workspace Badge -->
         <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-[11px] font-semibold border {{ $roleBadgeClass }}">
             <span class="w-1.5 h-1.5 rounded-full {{ $pulseColor }}"></span>

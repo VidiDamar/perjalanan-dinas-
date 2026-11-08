@@ -304,16 +304,6 @@
 
     <!-- Bottom Navigation Links -->
     <div class="flex flex-col gap-1 pt-4 border-t border-slate-200/70">
-        <!-- Return to Employee Portal if on other modules -->
-        @if(request()->is('approver*', 'travel-admin*', 'finance*', 'admin*'))
-            <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-slate-500 hover:text-[#0A2558] hover:bg-slate-100 font-medium text-xs transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                </svg>
-                <span>Kembali ke Mode Pegawai</span>
-            </a>
-        @endif
-
         <!-- Settings -->
         <a href="{{ route('settings.index') }}" class="flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl {{ request()->routeIs('settings.*') ? 'text-[#0A2558] font-semibold bg-[#E2E8F0]/70' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium' }} text-[14px] transition-colors">
             <svg class="w-5 h-5 {{ request()->routeIs('settings.*') ? 'text-[#0A2558]' : 'text-slate-500' }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

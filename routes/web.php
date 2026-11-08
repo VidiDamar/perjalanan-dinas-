@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TravelAdmin\TravelAdminController;
 use App\Http\Controllers\User\TravelRequestController;
 use App\Http\Controllers\User\UserApprovalController;
+use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\UserSettingsController;
 use App\Http\Controllers\User\UserSettlementController;
 use App\Models\User;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 // Home Landing Page (explaining the CTMS Dashboard ecosystem)
 Route::get('/', function () {
     return view('welcome');
-})->name('dashboard');
+})->name('home');
 
 // Quick Role Switcher for development & demo purposes
 Route::get('/switch-role/{role}', function (string $role) {
@@ -53,6 +54,8 @@ Route::get('/switch-role/{role}', function (string $role) {
 // ==========================================
 // 1. Modul Karyawan (User / Traveler)
 // ==========================================
+Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+
 Route::get('/requests', [TravelRequestController::class, 'index'])->name('requests.index');
 Route::get('/requests/create', [TravelRequestController::class, 'create'])->name('requests.create');
 Route::post('/requests', [TravelRequestController::class, 'store'])->name('requests.store');
