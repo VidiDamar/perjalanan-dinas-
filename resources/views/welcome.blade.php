@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-wf-domain="vita-travel.webflow.io" data-wf-page="696eeb62714a6c90a5f18ca8" data-wf-site="696eeb61714a6c90a5f18c9e" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8"/>
     <link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/>
@@ -79,14 +79,11 @@
                         <a href="#retreats" class="button-sm color-white header-nav__link"><span class="color-white-40 mobile-visible-inline">+</span>5 Role Workspace</a>
                     </li>
                     <li data-anim-delay="0.2" data-anim="fade-down" class="header-nav__item">
-                        <a href="{{ route('dashboard') }}" class="button-sm color-white header-nav__link"><span class="color-white-40 mobile-visible-inline">+</span>Dashboard</a>
-                    </li>
-                    <li data-anim-delay="0.3" data-anim="fade-down" class="header-nav__item">
                         <a href="{{ route('login') }}" class="button-sm color-white header-nav__link"><span class="color-white-40 mobile-visible-inline">+</span>Login</a>
                     </li>
                 </ul>
                 <a href="{{ route('login') }}" class="header__accent mobile-hidden w-inline-block">
-                    <div data-anim-delay="0.4" data-anim="fade-down" class="button-sm color-white">Masuk Sistem</div>
+                    <div data-anim-delay="0.3" data-anim="fade-down" class="button-sm color-white">Masuk Sistem</div>
                     <div class="header__dec header__dec--3"></div>
                 </a>
                 <div class="header__button mobile-visible">
@@ -115,9 +112,6 @@
             <ul role="list" class="header-nav">
                 <li class="header-nav__item">
                     <a href="#retreats" class="button-sm color-white header-nav__link"><span class="color-white-40 mobile-visible-inline">+</span>5 Role Workspace</a>
-                </li>
-                <li class="header-nav__item">
-                    <a href="{{ route('dashboard') }}" class="button-sm color-white header-nav__link"><span class="color-white-40 mobile-visible-inline">+</span>Dashboard</a>
                 </li>
                 <li class="header-nav__item">
                     <a href="{{ route('login') }}" class="button-sm color-white header-nav__link"><span class="color-white-40 mobile-visible-inline">+</span>Login</a>
@@ -350,8 +344,8 @@
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
-                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('switch-role', 'user') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
-                                                <div class="button-sm color-white">Buka Dashboard Karyawan</div>
+                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('login') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
+                                                <div class="button-sm color-white">Masuk ke Sistem</div>
                                                 <div class="btn-icon w-embed">
                                                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8 0C8 0 7.32057 2.41553 7.32057 4C7.32057 5.58447 8 8 8 8C8 8 5.58447 7.32057 4 7.32057C2.41553 7.32057 0 8 0 8C0 8 0.679427 5.58447 0.679427 4C0.679427 2.41553 0 0 0 0C0 0 2.41553 0.679426 4 0.679426C5.58447 0.679426 8 0 8 0Z" fill="white"/>
@@ -407,8 +401,8 @@
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
-                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('switch-role', 'atasan') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
-                                                <div class="button-sm color-white">Buka Dashboard Atasan</div>
+                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('login') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
+                                                <div class="button-sm color-white">Masuk ke Sistem</div>
                                                 <div class="btn-icon w-embed">
                                                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8 0C8 0 7.32057 2.41553 7.32057 4C7.32057 5.58447 8 8 8 8C8 8 5.58447 7.32057 4 7.32057C2.41553 7.32057 0 8 0 8C0 8 0.679427 5.58447 0.679427 4C0.679427 2.41553 0 0 0 0C0 0 2.41553 0.679426 4 0.679426C5.58447 0.679426 8 0 8 0Z" fill="white"/>
@@ -464,8 +458,8 @@
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
-                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('switch-role', 'travel_admin') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
-                                                <div class="button-sm color-white">Buka Dashboard Travel</div>
+                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('login') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
+                                                <div class="button-sm color-white">Masuk ke Sistem</div>
                                                 <div class="btn-icon w-embed">
                                                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8 0C8 0 7.32057 2.41553 7.32057 4C7.32057 5.58447 8 8 8 8C8 8 5.58447 7.32057 4 7.32057C2.41553 7.32057 0 8 0 8C0 8 0.679427 5.58447 0.679427 4C0.679427 2.41553 0 0 0 0C0 0 2.41553 0.679426 4 0.679426C5.58447 0.679426 8 0 8 0Z" fill="white"/>
@@ -521,8 +515,8 @@
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
-                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('switch-role', 'finance') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
-                                                <div class="button-sm color-white">Buka Dashboard Finance</div>
+                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('login') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
+                                                <div class="button-sm color-white">Masuk ke Sistem</div>
                                                 <div class="btn-icon w-embed">
                                                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8 0C8 0 7.32057 2.41553 7.32057 4C7.32057 5.58447 8 8 8 8C8 8 5.58447 7.32057 4 7.32057C2.41553 7.32057 0 8 0 8C0 8 0.679427 5.58447 0.679427 4C0.679427 2.41553 0 0 0 0C0 0 2.41553 0.679426 4 0.679426C5.58447 0.679426 8 0 8 0Z" fill="white"/>
@@ -578,8 +572,8 @@
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
-                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('switch-role', 'admin') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
-                                                <div class="button-sm color-white">Buka Dashboard Admin</div>
+                                            <a data-wf--button-secondary--variant="full-width" href="{{ route('login') }}" class="btn-secondary w-variant-28eadc15-d435-4480-c473-16eb53816cbc w-inline-block">
+                                                <div class="button-sm color-white">Masuk ke Sistem</div>
                                                 <div class="btn-icon w-embed">
                                                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8 0C8 0 7.32057 2.41553 7.32057 4C7.32057 5.58447 8 8 8 8C8 8 5.58447 7.32057 4 7.32057C2.41553 7.32057 0 8 0 8C0 8 0.679427 5.58447 0.679427 4C0.679427 2.41553 0 0 0 0C0 0 2.41553 0.679426 4 0.679426C5.58447 0.679426 8 0 8 0Z" fill="white"/>
@@ -1199,10 +1193,10 @@
                                         <div class="column column-6">
                                             <div class="footer-top__links">
                                                 <div class="footer-top__link">
-                                                    <a href="{{ route('login') }}" class="h3 color-white"><span class="color-white-40">+</span>Login</a>
+                                                    <a href="#retreats" class="h3 color-white"><span class="color-white-40">+</span>5 Role</a>
                                                 </div>
                                                 <div class="footer-top__link">
-                                                    <a href="{{ route('dashboard') }}" class="h3 color-white"><span class="color-white-40">+</span>Dashboard</a>
+                                                    <a href="{{ route('login') }}" class="h3 color-white"><span class="color-white-40">+</span>Login</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1235,11 +1229,8 @@
                             </a>
                         </div>
                         <div class="footer-bottom__links">
-                            <div class="footer-bottom__link"><a href="{{ route('switch-role', 'user') }}" class="button-sm color-white-60">Karyawan</a></div>
-                            <div class="footer-bottom__link"><a href="{{ route('switch-role', 'atasan') }}" class="button-sm color-white-60">Atasan</a></div>
-                            <div class="footer-bottom__link"><a href="{{ route('switch-role', 'travel_admin') }}" class="button-sm color-white-60">Travel Desk</a></div>
-                            <div class="footer-bottom__link"><a href="{{ route('switch-role', 'finance') }}" class="button-sm color-white-60">Finance</a></div>
-                            <div class="footer-bottom__link"><a href="{{ route('switch-role', 'admin') }}" class="button-sm color-white-60">Admin</a></div>
+                            <div class="footer-bottom__link"><a href="#retreats" class="button-sm color-white-60">5 Role Workspace</a></div>
+                            <div class="footer-bottom__link"><a href="{{ route('login') }}" class="button-sm color-white-60">Portal Login</a></div>
                         </div>
                         <div class="footer-made-by mobile-visible">
                             <div class="button-sm color-white-60">Enterprise</div>
@@ -1252,10 +1243,8 @@
         </div>
     </div>
 
-    <!-- Scripts (Exact Vita Travel Webflow + GSAP + ScrollSmoother + SplitText Stack) -->
-    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=696eeb61714a6c90a5f18c9e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/js/webflow.schunk.6a83f24a1a67dfcd.js" type="text/javascript" integrity="sha384-bMbGI8D84p14FWDeQ0S95uC/9+ixYyrKYt+jl41K4/S41T4XTL6mTd9AkEZQLMCf" crossorigin="anonymous"></script>
-    <script src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/js/webflow.a9ba356d.d2f30196489a2709.js" type="text/javascript" integrity="sha384-csGkhjFGgkSz8t16Ud75ydCbjLPF/KwVXVDchd4zvLDKt8Bf0NTemUS5BXjXjjmC" crossorigin="anonymous"></script>
+    <!-- Scripts (GSAP + ScrollSmoother + SplitText Stack, without Webflow Badge Script) -->
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
@@ -1265,6 +1254,12 @@
     <script src="{{ asset('vita/app.min.js') }}" type="text/javascript"></script>
 
     <style>
+        .w-webflow-badge {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
         .footer__copy .button-sm {
             line-height: 125%;
         }
