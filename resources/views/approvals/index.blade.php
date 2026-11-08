@@ -78,7 +78,10 @@
                     @if($selectedTrip->status === 'revision_required')
                         <div class="my-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs">
                             <div class="flex items-center gap-2 text-amber-800 font-bold mb-1">
-                                <span>⚠️ Catatan Revisi dari Atasan:</span>
+                                <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                </svg>
+                                <span>Catatan Revisi dari Atasan:</span>
                             </div>
                             <p class="text-amber-900 leading-relaxed">
                                 {{ $selectedTrip->revision_notes ?? 'Harap tinjau kembali rincian anggaran hotel dan sesuaikan dengan batas kebijakan.' }}
@@ -93,25 +96,25 @@
                             <!-- Step 1: Submit -->
                             <div class="p-3.5 rounded-xl bg-emerald-50/80 border border-emerald-200">
                                 <div class="flex items-center gap-2 font-bold text-emerald-800">
-                                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                                    <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">1</span>
                                     <span>1. Pengajuan</span>
                                 </div>
                                 <div class="text-[11px] text-slate-600 mt-1">Diajukan oleh Anda</div>
-                                <div class="text-[10px] text-emerald-700 font-medium">{{ $selectedTrip->created_at->format('d M Y, H:i') }} WIB</div>
+                                <div class="text-[10px] text-emerald-700 font-medium tabular-nums">{{ $selectedTrip->created_at->format('d M Y, H:i') }} WIB</div>
                             </div>
 
                             <!-- Step 2: Manager Approval -->
-                            <div class="p-3.5 rounded-xl border {{ in_array($selectedTrip->status, ['approved', 'ticket_issued', 'completed']) ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800' : 'bg-amber-50/80 border-amber-300 text-amber-900' }}">
+                            <div class="p-3.5 rounded-xl border {{ in_array($selectedTrip->status, ['approved', 'booked', 'completed']) ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800' : 'bg-amber-50/80 border-amber-300 text-amber-900' }}">
                                 <div class="flex items-center gap-2 font-bold">
-                                    <span class="w-5 h-5 rounded-full {{ in_array($selectedTrip->status, ['approved', 'ticket_issued', 'completed']) ? 'bg-emerald-500' : 'bg-amber-500' }} text-white flex items-center justify-center text-[10px]">
-                                        {{ in_array($selectedTrip->status, ['approved', 'ticket_issued', 'completed']) ? '✓' : '2' }}
+                                    <span class="w-5 h-5 rounded-full {{ in_array($selectedTrip->status, ['approved', 'booked', 'completed']) ? 'bg-emerald-600' : 'bg-amber-500' }} text-white flex items-center justify-center text-[10px]">
+                                        2
                                     </span>
                                     <span>2. Approval Atasan</span>
                                 </div>
                                 <div class="text-[11px] mt-1">{{ $selectedTrip->approver->name ?? 'Budi Santoso' }}</div>
                                 <div class="text-[10px] font-medium">
-                                    @if($selectedTrip->approval_date)
-                                        Disetujui: {{ $selectedTrip->approval_date->format('d M Y') }}
+                                    @if($selectedTrip->approved_at)
+                                        Disetujui: {{ $selectedTrip->approved_at->format('d M Y') }}
                                     @else
                                         Menunggu Keputusan
                                     @endif
@@ -119,24 +122,24 @@
                             </div>
 
                             <!-- Step 3: Travel Desk Booking -->
-                            <div class="p-3.5 rounded-xl border {{ $selectedTrip->pnr_code ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800' : 'bg-slate-50 border-slate-200 text-slate-500 opacity-60' }}">
+                            <div class="p-3.5 rounded-xl border {{ $selectedTrip->is_booked ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800' : 'bg-slate-50 border-slate-200 text-slate-500 opacity-60' }}">
                                 <div class="flex items-center gap-2 font-bold">
-                                    <span class="w-5 h-5 rounded-full {{ $selectedTrip->pnr_code ? 'bg-emerald-500 text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[10px]">
-                                        {{ $selectedTrip->pnr_code ? '✓' : '3' }}
+                                    <span class="w-5 h-5 rounded-full {{ $selectedTrip->is_booked ? 'bg-emerald-600 text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[10px]">
+                                        3
                                     </span>
                                     <span>3. Tiket & Hotel</span>
                                 </div>
                                 <div class="text-[11px] mt-1">Admin Travel Desk</div>
                                 <div class="text-[10px] font-medium">
-                                    {{ $selectedTrip->pnr_code ? 'Tiket Terbit' : 'Belum Diproses' }}
+                                    {{ $selectedTrip->is_booked ? 'Tiket Terbit' : 'Belum Diproses' }}
                                 </div>
                             </div>
 
                             <!-- Step 4: Cash Advance -->
                             <div class="p-3.5 rounded-xl border {{ $selectedTrip->cash_advance_status === 'disbursed' ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800' : 'bg-slate-50 border-slate-200 text-slate-500 opacity-60' }}">
                                 <div class="flex items-center gap-2 font-bold">
-                                    <span class="w-5 h-5 rounded-full {{ $selectedTrip->cash_advance_status === 'disbursed' ? 'bg-emerald-500 text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[10px]">
-                                        {{ $selectedTrip->cash_advance_status === 'disbursed' ? '✓' : '4' }}
+                                    <span class="w-5 h-5 rounded-full {{ $selectedTrip->cash_advance_status === 'disbursed' ? 'bg-emerald-600 text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[10px]">
+                                        4
                                     </span>
                                     <span>4. Uang Muka</span>
                                 </div>

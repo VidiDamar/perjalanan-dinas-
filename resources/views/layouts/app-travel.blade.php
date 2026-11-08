@@ -37,7 +37,5 @@
         </div>
     </div>
 
-    <!-- Quick Role Switcher Floating Dock -->
-    @include('components.role-switcher')
 </body>
 </html>

@@ -45,6 +45,28 @@ class Settlement extends Model
         return $this->hasMany(SettlementExpenseItem::class);
     }
 
+    public function items(): HasMany
+    {
+        return $this->hasMany(SettlementExpenseItem::class);
+    }
+
+    public function getCashAdvanceReceivedAttribute(): float
+    {
+        return (float) ($this->attributes['cash_advance_amount'] ?? 0);
+    }
+
+    public function getDifferenceAttribute(): float
+    {
+        $diff = (float) ($this->attributes['difference_amount'] ?? 0);
+
+        return ($this->attributes['settlement_type'] ?? 'balanced') === 'refund' ? -$diff : $diff;
+    }
+
+    public function getRejectionReasonAttribute(): ?string
+    {
+        return $this->attributes['finance_notes'] ?? null;
+    }
+
     public function getStatusLabelAttribute(): string
     {
         return match ($this->status) {

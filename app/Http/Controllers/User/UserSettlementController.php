@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\AuditLog;
 use App\Models\Settlement;
 use App\Models\SettlementExpenseItem;
 use App\Models\TravelRequest;
@@ -24,22 +25,25 @@ class UserSettlementController extends Controller
     {
         $user = $this->getActiveUser();
 
-        // All settlements belonging to user
         $settlements = Settlement::with(['travelRequest', 'expenseItems'])
             ->where('user_id', $user->id)
             ->orderByDesc('id')
             ->get();
 
-        // Approved/completed trips without settlement
+        // Approved/completed trips without settlement OR with a rejected settlement needing revision
         $availableTrips = TravelRequest::where('user_id', $user->id)
             ->whereIn('status', ['approved', 'ticket_issued', 'completed'])
-            ->whereDoesntHave('settlement')
+            ->where(function ($q) {
+                $q->whereDoesntHave('settlement')
+                    ->orWhereHas('settlement', function ($sq) {
+                        $sq->where('status', 'rejected');
+                    });
+            })
             ->orderByDesc('id')
             ->get();
 
-        // Selected trip or settlement
         $selectedTripId = $request->query('trip_id') ?? ($availableTrips->first()?->id);
-        $selectedTrip = $selectedTripId ? TravelRequest::find($selectedTripId) : null;
+        $selectedTrip = $selectedTripId ? TravelRequest::with('settlement.expenseItems')->find($selectedTripId) : null;
 
         return view('settlements.index', compact('user', 'settlements', 'availableTrips', 'selectedTrip'));
     }
@@ -54,6 +58,7 @@ class UserSettlementController extends Controller
         $validated = $request->validate([
             'travel_request_id' => 'required|exists:travel_requests,id',
             'notes' => 'nullable|string|max:500',
+            'refund_transfer_proof' => 'nullable|string|max:255',
             'items' => 'required|array|min:1',
             'items.*.category' => 'required|string',
             'items.*.merchant_name' => 'required|string|max:255',
@@ -67,37 +72,60 @@ class UserSettlementController extends Controller
             ->where('user_id', $user->id)
             ->firstOrFail();
 
-        $cashAdvance = $trip->cash_advance_requested ?? 0;
-        $totalActual = 0;
+        $cashAdvance = (float) ($trip->cash_advance_requested ?? 0);
+        $totalActual = 0.0;
 
         foreach ($validated['items'] as $item) {
             $totalActual += (float) $item['amount'];
         }
 
         $difference = $totalActual - $cashAdvance;
-        $settlementType = $difference >= 0 ? 'reimbursement' : 'refund';
+        if ($difference > 0) {
+            $settlementType = 'reimbursement';
+        } elseif ($difference < 0) {
+            $settlementType = 'refund';
+        } else {
+            $settlementType = 'balanced';
+        }
 
-        // Generate Settlement Number (SET-YYYY-XXXX)
-        $latestId = Settlement::max('id') + 1;
-        $settlementNumber = 'SET-'.date('Y').'-'.str_pad($latestId, 4, '0', STR_PAD_LEFT);
+        $existingSettlement = Settlement::where('travel_request_id', $trip->id)->first();
 
-        $settlement = Settlement::create([
-            'settlement_number' => $settlementNumber,
-            'travel_request_id' => $trip->id,
-            'user_id' => $user->id,
-            'cash_advance_amount' => $cashAdvance,
-            'total_actual_expense' => $totalActual,
-            'difference_amount' => abs($difference),
-            'settlement_type' => $settlementType,
-            'notes' => $validated['notes'] ?? null,
-            'status' => 'submitted',
-        ]);
+        if ($existingSettlement) {
+            $settlementNumber = $existingSettlement->settlement_number;
+            $existingSettlement->update([
+                'cash_advance_amount' => $cashAdvance,
+                'total_actual_expense' => $totalActual,
+                'difference_amount' => abs($difference),
+                'settlement_type' => $settlementType,
+                'refund_transfer_proof' => $validated['refund_transfer_proof'] ?? $existingSettlement->refund_transfer_proof,
+                'notes' => $validated['notes'] ?? null,
+                'status' => 'submitted',
+                'finance_notes' => null,
+            ]);
+            $existingSettlement->expenseItems()->delete();
+            $settlement = $existingSettlement;
+        } else {
+            $latestId = Settlement::max('id') + 1;
+            $settlementNumber = 'SET-'.date('Y').'-'.str_pad((string) $latestId, 4, '0', STR_PAD_LEFT);
 
-        // Save each expense item
+            $settlement = Settlement::create([
+                'settlement_number' => $settlementNumber,
+                'travel_request_id' => $trip->id,
+                'user_id' => $user->id,
+                'cash_advance_amount' => $cashAdvance,
+                'total_actual_expense' => $totalActual,
+                'difference_amount' => abs($difference),
+                'settlement_type' => $settlementType,
+                'refund_transfer_proof' => $validated['refund_transfer_proof'] ?? null,
+                'notes' => $validated['notes'] ?? null,
+                'status' => 'submitted',
+            ]);
+        }
+
         foreach ($validated['items'] as $index => $itemData) {
             $receiptPath = null;
             if ($request->hasFile("items.{$index}.receipt")) {
-                $receiptPath = $request->file("items.{$index}.receipt")->store('receipts', 'public');
+                $receiptPath = $request->file("items.{$index}.receipt")->store('receipts', 'local');
             }
 
             SettlementExpenseItem::create([
@@ -112,8 +140,14 @@ class UserSettlementController extends Controller
             ]);
         }
 
-        // Update travel request status to completed
         $trip->update(['status' => 'completed']);
+
+        AuditLog::record(
+            'SUBMIT_SETTLEMENT',
+            "Mengajukan laporan settlement {$settlementNumber} (Realisasi: Rp ".number_format($totalActual, 0, ',', '.').')',
+            $settlementNumber,
+            $user
+        );
 
         return redirect()->route('settlements.index')
             ->with('success', "Pertanggungjawaban biaya {$settlementNumber} berhasil diajukan dan menunggu audit Tim Keuangan!");

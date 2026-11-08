@@ -1,56 +1,66 @@
-<aside class="w-64 bg-[#F8FAFC] border-r border-slate-200/80 flex flex-col justify-between shrink-0 min-h-screen p-5 select-none">
+@php
+    $pendingApprovalCount = \App\Models\TravelRequest::where('status', 'pending_approval')->count();
+    $readyBookingCount = \App\Models\TravelRequest::where('status', 'approved')->whereNull('pnr_code')->count();
+    $pendingCaCount = \App\Models\TravelRequest::whereIn('status', ['approved', 'ticket_issued'])->where('cash_advance_requested', '>', 0)->where('cash_advance_status', '!=', 'disbursed')->count();
+    $pendingSettlementCount = \App\Models\Settlement::whereIn('status', ['submitted', 'pending_audit'])->count();
+    $activeFieldCount = \App\Models\TravelRequest::where(function ($q) {
+        $q->where('checked_in', true)->orWhereNotNull('checkin_at');
+    })->count();
+@endphp
+<aside class="w-64 bg-[#F8FAFC] border-r border-slate-200 flex flex-col justify-between shrink-0 min-h-screen p-5 select-none">
     <div class="flex flex-col gap-5">
         <!-- Logo & Brand Header -->
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-1 py-1 group">
-            <div class="w-11 h-auto rounded-xl flex items-center justify-center p-2 shadow-2xs">
-               <img src="/logo_perusahaan.png" alt="logo" class="max-h-8 object-contain">
+            <div class="w-10 h-10 rounded-lg bg-[#0A2558] text-white flex items-center justify-center p-2 shadow-2xs">
+               <img src="/logo_perusahaan.png" alt="logo" class="max-h-6 object-contain brightness-0 invert" onerror="this.style.display='none'">
+               <span class="font-bold text-xs tracking-wider">CTMS</span>
             </div>
             <div class="flex flex-col">
-                <span class="font-bold text-[17px] text-[#0F2851] tracking-tight leading-snug">Jaya Abadi</span>
-                <span class="text-[12px] text-slate-500 font-medium leading-none">Travel Management</span>
+                <span class="font-bold text-[16px] text-[#0F2851] tracking-tight leading-snug">PT Jaya Abadi</span>
+                <span class="text-[11px] text-slate-500 font-medium leading-none mt-0.5">Enterprise Travel System</span>
             </div>
         </a>
 
         @if(request()->is('approver*'))
-            <!-- CTA Atasan: Info Antrean -->
-            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-xl p-3 text-white shadow-xs">
+            <!-- Enterprise Status Summary: Atasan -->
+            <div class="bg-[#0A2558] rounded-xl p-3.5 text-white border border-slate-800 shadow-2xs">
                 <div class="flex items-center justify-between text-xs font-semibold mb-1">
-                    <span>Antrean Butuh Review</span>
-                    <span class="px-1.5 py-0.5 rounded-full bg-white/20 text-[11px] font-bold">2 SPPD</span>
+                    <span class="text-slate-200">Antrean Otorisasi</span>
+                    <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[11px] font-bold tabular-nums">{{ $pendingApprovalCount }} SPPD</span>
                 </div>
-                <p class="text-[11px] text-emerald-100">Harap tinjau pengajuan dinas anggota tim sebelum H-3 keberangkatan.</p>
+                <p class="text-[11px] text-slate-300 leading-relaxed">Verifikasi kepatuhan plafon dan rab dinas anggota tim.</p>
             </div>
         @elseif(request()->is('travel-admin*'))
-            <!-- CTA Admin Travel -->
-            <div class="bg-gradient-to-r from-sky-600 to-blue-700 rounded-xl p-3 text-white shadow-xs">
+            <!-- Enterprise Status Summary: Admin Travel -->
+            <div class="bg-[#0A2558] rounded-xl p-3.5 text-white border border-slate-800 shadow-2xs">
                 <div class="flex items-center justify-between text-xs font-semibold mb-1">
-                    <span>Antrean Tiket & Hotel</span>
-                    <span class="px-1.5 py-0.5 rounded-full bg-white/20 text-[11px] font-bold">3 Tiket</span>
+                    <span class="text-slate-200">Fulfillment Tiket</span>
+                    <span class="px-2 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-400/30 text-[11px] font-bold tabular-nums">{{ $readyBookingCount }} Siap</span>
                 </div>
-                <p class="text-[11px] text-sky-100">Siap proses PNR maskapai & booking hotel rekanan.</p>
+                <p class="text-[11px] text-slate-300 leading-relaxed">Penerbitan kode PNR maskapai & voucher hotel korporat.</p>
             </div>
         @elseif(request()->is('finance*'))
-            <!-- CTA Finance -->
-            <div class="bg-gradient-to-r from-indigo-600 to-slate-800 rounded-xl p-3 text-white shadow-xs">
+            <!-- Enterprise Status Summary: Finance -->
+            <div class="bg-[#0A2558] rounded-xl p-3.5 text-white border border-slate-800 shadow-2xs">
                 <div class="flex items-center justify-between text-xs font-semibold mb-1">
-                    <span>Kasbon & Settlement</span>
-                    <span class="px-1.5 py-0.5 rounded-full bg-white/20 text-[11px] font-bold">Rp 18.5 Jt</span>
+                    <span class="text-slate-200">Antrean Treasury</span>
+                    <span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/30 text-[11px] font-bold tabular-nums">{{ $pendingCaCount + $pendingSettlementCount }} Tugas</span>
                 </div>
-                <p class="text-[11px] text-indigo-100">Verifikasi pengeluaran riil vs kasbon yang dikeluarkan.</p>
+                <p class="text-[11px] text-slate-300 leading-relaxed">Pencairan uang muka (CA) & rekonsiliasi nota settlement.</p>
             </div>
         @elseif(request()->is('admin*'))
-            <!-- CTA Super Admin -->
-            <div class="bg-gradient-to-r from-purple-700 to-indigo-900 rounded-xl p-3 text-white shadow-xs">
+            <!-- Enterprise Status Summary: Super Admin -->
+            <div class="bg-[#0A2558] rounded-xl p-3.5 text-white border border-slate-800 shadow-2xs">
                 <div class="flex items-center justify-between text-xs font-semibold mb-1">
-                    <span>Radar Dinas Lapangan</span>
-                    <span class="px-1.5 py-0.5 rounded-full bg-emerald-400 text-slate-900 text-[10px] font-bold">4 Aktif</span>
+                    <span class="text-slate-200">Radar Duty of Care</span>
+                    <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[11px] font-bold tabular-nums">{{ $activeFieldCount }} Aktif</span>
                 </div>
-                <p class="text-[11px] text-purple-100">Pantau kepatuhan kebijakan perjalanan dinas.</p>
+                <p class="text-[11px] text-slate-300 leading-relaxed">Kontrol matriks plafon biaya & log audit kepatuhan.</p>
             </div>
         @else
             <!-- Action Button Pegawai -->
             <div>
-                <a href="{{ route('requests.create') }}" class="w-full flex items-center justify-center gap-2 bg-[#0A2558] hover:bg-[#081c42] text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-xs transition-all duration-150 active:scale-[0.99]">
+                <a href="{{ route('requests.create') }}" class="w-full flex items-center justify-center gap-2 bg-[#0A2558] hover:bg-[#081c42] text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-2xs transition-all duration-150">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -85,8 +95,8 @@
                         </svg>
                         <span>Antrean Pengajuan</span>
                     </div>
-                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-emerald-800 bg-emerald-100 rounded-full">
-                        2 Pending
+                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-emerald-800 bg-emerald-100 rounded-full tabular-nums">
+                        {{ $pendingApprovalCount }} Pending
                     </span>
                 </a>
 
@@ -123,8 +133,8 @@
                         </svg>
                         <span>Antrean Booking Tiket</span>
                     </div>
-                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-sky-800 bg-sky-100 rounded-full">
-                        3 Siap
+                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-sky-800 bg-sky-100 rounded-full tabular-nums">
+                        {{ $readyBookingCount }} Siap
                     </span>
                 </a>
 
@@ -163,8 +173,8 @@
                         </svg>
                         <span>Pencairan Uang Muka</span>
                     </div>
-                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-amber-800 bg-amber-100 rounded-full">
-                        2 Cair
+                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-amber-800 bg-amber-100 rounded-full tabular-nums">
+                        {{ $pendingCaCount }} Cair
                     </span>
                 </a>
 
@@ -180,8 +190,8 @@
                         </svg>
                         <span>Audit Settlement Nota</span>
                     </div>
-                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-indigo-800 bg-indigo-100 rounded-full">
-                        1 Klaim
+                    <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-indigo-800 bg-indigo-100 rounded-full tabular-nums">
+                        {{ $pendingSettlementCount }} Klaim
                     </span>
                 </a>
 

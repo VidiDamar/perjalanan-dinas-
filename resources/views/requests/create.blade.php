@@ -191,7 +191,7 @@
                 </div>
 
                 <!-- Transport Mode & Preferences -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1.5">Pilihan Moda Transportasi Utama <span class="text-rose-500">*</span></label>
                         <select name="transport_mode" class="w-full appearance-none bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 font-medium focus:outline-none focus:ring-1 focus:ring-sky-500 shadow-2xs cursor-pointer">
@@ -200,6 +200,17 @@
                             <option value="Company Car" {{ old('transport_mode') == 'Company Car' ? 'selected' : '' }}>Mobil Dinas Kantor</option>
                             <option value="Rental Car" {{ old('transport_mode') == 'Rental Car' ? 'selected' : '' }}>Mobil Sewa (Rental)</option>
                         </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Kode Cost Center / Proyek</label>
+                        <input 
+                            type="text" 
+                            name="cost_center"
+                            value="{{ old('cost_center', 'CC-2026-OPS') }}"
+                            placeholder="Contoh: CC-2026-IT-04" 
+                            class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 font-mono focus:outline-none focus:ring-1 focus:ring-sky-500 shadow-2xs"
+                        />
                     </div>
 
                     <div>
@@ -290,7 +301,7 @@
                                 @click="perDiemManual = !perDiemManual; if (!perDiemManual) perDiemCustom = 0;"
                                 class="text-[11px] font-semibold px-2 py-0.5 rounded-lg transition"
                                 :class="perDiemManual ? 'bg-sky-100 text-sky-700 border border-sky-300' : 'bg-slate-100 text-slate-500 border border-slate-200'"
-                                x-text="perDiemManual ? '✏️ Custom' : '⚡ Otomatis'"
+                                x-text="perDiemManual ? 'Mode Custom' : 'Mode Otomatis'"
                             ></button>
                         </div>
                     </div>
@@ -336,19 +347,37 @@
                 </div>
             </div>
 
+            <!-- Out of Policy Justification (Shown when hotel over limit or old value exists) -->
+            <div x-show="isHotelOverLimit" class="mt-5 p-4 rounded-xl bg-amber-50/80 border border-amber-200 text-xs" style="display: none;">
+                <label class="block font-bold text-amber-900 mb-1.5">Alasan Justifikasi Melebihi Plafon (Out-of-Policy Justification)</label>
+                <input
+                    type="text"
+                    name="out_of_policy_reason"
+                    value="{{ old('out_of_policy_reason') }}"
+                    placeholder="Jelaskan alasan bisnis mengapa tarif melebihi plafon standar jabatan..."
+                    class="w-full bg-white border border-amber-300 rounded-xl px-3.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                />
+            </div>
+
             <!-- Total Budget Summary Card -->
             <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-4">
                 <!-- Uang Muka (Cash Advance) - Editable -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-3">
                     <div class="flex-1">
                         <div class="flex items-center justify-between mb-1.5">
-                            <label class="text-xs font-semibold text-slate-700">💳 Kasbon / Uang Muka yang Diminta</label>
+                            <label class="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-[#0A2558]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <rect width="20" height="14" x="2" y="5" rx="2" />
+                                    <line x1="2" x2="22" y1="10" y2="10" />
+                                </svg>
+                                <span>Kasbon / Uang Muka yang Diminta</span>
+                            </label>
                             <button
                                 type="button"
                                 @click="cashAdvanceManual = !cashAdvanceManual; if (!cashAdvanceManual) cashAdvanceCustom = 0;"
                                 class="text-[11px] font-semibold px-2 py-0.5 rounded-lg transition"
                                 :class="cashAdvanceManual ? 'bg-sky-100 text-sky-700 border border-sky-300' : 'bg-slate-100 text-slate-500 border border-slate-200'"
-                                x-text="cashAdvanceManual ? '✏️ Custom' : '⚡ Sama dengan Per Diem'"
+                                x-text="cashAdvanceManual ? 'Mode Custom' : 'Sama dengan Per Diem'"
                             ></button>
                         </div>
                         <div class="relative">

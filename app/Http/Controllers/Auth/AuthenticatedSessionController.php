@@ -28,11 +28,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if ($request->user()->role === 'atasan') {
-            return redirect()->intended(route('approver.dashboard'));
-        }
+        $role = $request->user()->role;
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $targetRoute = match ($role) {
+            'atasan', 'approver' => route('approver.dashboard'),
+            'travel_admin' => route('travel-admin.dashboard'),
+            'finance' => route('finance.dashboard'),
+            'admin' => route('admin.dashboard'),
+            default => route('dashboard', absolute: false),
+        };
+
+        return redirect()->intended($targetRoute);
     }
 
     /**
@@ -46,6 +52,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect('/');
     }
 }

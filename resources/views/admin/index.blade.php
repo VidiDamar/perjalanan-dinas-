@@ -32,7 +32,7 @@
                     </svg>
                 </span>
             </div>
-            <div class="text-3xl font-extrabold text-slate-900 tracking-tight">4 <span class="text-sm font-semibold text-emerald-600 ml-1">Karyawan</span></div>
+            <div class="text-3xl font-extrabold text-slate-900 tracking-tight tabular-nums">{{ $stats['active_field_count'] ?? 4 }} <span class="text-sm font-semibold text-emerald-600 ml-1">Karyawan</span></div>
             <p class="text-xs text-emerald-700 font-medium mt-1.5 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                 <span>Semua ter-check-in di kota tujuan</span>
@@ -42,15 +42,15 @@
         <!-- Card 2: Total SPPD -->
         <div class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs">
             <div class="flex items-center justify-between mb-3">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total SPPD Terbit (2023)</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total SPPD Terbit</span>
                 <span class="p-2 bg-sky-50 rounded-xl text-sky-600">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
                     </svg>
                 </span>
             </div>
-            <div class="text-3xl font-extrabold text-slate-900 tracking-tight">89 <span class="text-sm font-semibold text-sky-600 ml-1">Perjalanan</span></div>
-            <p class="text-xs text-slate-500 font-medium mt-1.5">Tingkat kepatuhan policy: 96.2%</p>
+            <div class="text-3xl font-extrabold text-slate-900 tracking-tight tabular-nums">{{ $stats['total_sppd'] ?? 4 }} <span class="text-sm font-semibold text-sky-600 ml-1">Perjalanan</span></div>
+            <p class="text-xs text-slate-500 font-medium mt-1.5 tabular-nums">Tingkat kepatuhan policy: {{ $stats['compliance_rate'] ?? 96.2 }}%</p>
         </div>
 
         <!-- Card 3: Total Biaya Dinas -->
@@ -63,7 +63,7 @@
                     </svg>
                 </span>
             </div>
-            <div class="text-2xl font-extrabold text-slate-900 tracking-tight mt-1">Rp 412.5 Jt</div>
+            <div class="text-2xl font-extrabold text-slate-900 tracking-tight mt-1 tabular-nums">Rp {{ number_format($stats['total_budget'] ?? 25450000, 0, ',', '.') }}</div>
             <p class="text-xs text-slate-500 font-medium mt-1">Plafon Perusahaan: Rp 600 Jt</p>
         </div>
 
@@ -106,8 +106,14 @@
                 </div>
                 <div class="text-slate-500">IT Infra &bull; Senior Engineer</div>
                 <div class="pt-2 border-t border-slate-200">
-                    <div class="font-semibold text-slate-800">📍 Surabaya, Jawa Timur</div>
-                    <div class="text-[11px] text-slate-500">Hotel Santika Premiere Gubeng</div>
+                    <div class="font-semibold text-slate-800 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <span>Surabaya, Jawa Timur</span>
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-0.5">Hotel Santika Premiere Gubeng</div>
                     <div class="text-[10px] text-slate-400 mt-1">Waktu: Hari ini, 10:45 WIB</div>
                 </div>
             </div>
@@ -120,8 +126,14 @@
                 </div>
                 <div class="text-slate-500">Project Operations Lead</div>
                 <div class="pt-2 border-t border-slate-200">
-                    <div class="font-semibold text-slate-800">📍 Semarang, Jawa Tengah</div>
-                    <div class="text-[11px] text-slate-500">Kantor Cabang Trans Jawa</div>
+                    <div class="font-semibold text-slate-800 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <span>Semarang, Jawa Tengah</span>
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-0.5">Kantor Cabang Trans Jawa</div>
                     <div class="text-[10px] text-slate-400 mt-1">Waktu: Kemarin, 09:15 WIB</div>
                 </div>
             </div>
@@ -134,8 +146,14 @@
                 </div>
                 <div class="text-slate-500">Network Engineer</div>
                 <div class="pt-2 border-t border-slate-200">
-                    <div class="font-semibold text-slate-800">📍 Bandung, Jawa Barat</div>
-                    <div class="text-[11px] text-slate-500">IDC Data Center Batununggal</div>
+                    <div class="font-semibold text-slate-800 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <span>Bandung, Jawa Barat</span>
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-0.5">IDC Data Center Batununggal</div>
                     <div class="text-[10px] text-slate-400 mt-1">Waktu: Hari ini, 11:20 WIB</div>
                 </div>
             </div>
@@ -148,8 +166,14 @@
                 </div>
                 <div class="text-slate-500">Civil & Project Manager</div>
                 <div class="pt-2 border-t border-slate-200">
-                    <div class="font-semibold text-slate-800">📍 Balikpapan / IKN</div>
-                    <div class="text-[11px] text-slate-500">Site Proyek Infrastruktur</div>
+                    <div class="font-semibold text-slate-800 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <span>Balikpapan / IKN</span>
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-0.5">Site Proyek Infrastruktur</div>
                     <div class="text-[10px] text-slate-400 mt-1">Waktu: 19 Okt 2023, 14:00 WITA</div>
                 </div>
             </div>
@@ -160,7 +184,9 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <a href="{{ route('admin.users') }}" class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-purple-300 transition group">
             <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-105 transition">
-                👥
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                </svg>
             </div>
             <h3 class="font-bold text-slate-900 text-sm">Master Karyawan & Organisasi</h3>
             <p class="text-xs text-slate-500 mt-1">Kelola data pegawai, penugasan level jabatan, dan tetapkan struktur hierarki atasan langsung (Approver 1 & 2).</p>
@@ -168,7 +194,9 @@
 
         <a href="{{ route('admin.policies') }}" class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-purple-300 transition group">
             <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-105 transition">
-                ⚖️
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
+                </svg>
             </div>
             <h3 class="font-bold text-slate-900 text-sm">Travel Policy Engine & Plafon</h3>
             <p class="text-xs text-slate-500 mt-1">Atur matriks batas tarif hotel per malam, uang harian (Per Diem), kelas tiket transportasi, dan ambang batas Direktur.</p>
@@ -176,7 +204,9 @@
 
         <a href="{{ route('admin.audit-logs') }}" class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:border-purple-300 transition group">
             <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-105 transition">
-                📜
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
+                </svg>
             </div>
             <h3 class="font-bold text-slate-900 text-sm">Audit Trail Log Sistem</h3>
             <p class="text-xs text-slate-500 mt-1">Pelacakan log aktivitas lengkap: histori persetujuan SPPD, pencairan kasbon, perubahan parameter kebijakan, alamat IP & timestamp.</p>

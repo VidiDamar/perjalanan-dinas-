@@ -1,9 +1,13 @@
 <x-app-travel-layout>
     <!-- Flash Notifications -->
     @if(session('success'))
-        <div class="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-xs">
+        <div class="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-2xs">
             <div class="flex items-center gap-2.5">
-                <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[11px]">✓</span>
+                <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                </span>
                 <span>{{ session('success') }}</span>
             </div>
             <button type="button" onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900 font-bold text-sm">&times;</button>
@@ -78,7 +82,9 @@
                 </button>
                 @if(request()->hasAny(['search', 'status']))
                     <a href="{{ route('requests.index') }}" class="p-2.5 text-slate-500 hover:text-slate-800 bg-slate-100 rounded-xl" title="Reset filter">
-                        ✕
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                     </a>
                 @endif
             </div>

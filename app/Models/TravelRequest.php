@@ -50,6 +50,128 @@ class TravelRequest extends Model
         return $this->hasOne(Settlement::class);
     }
 
+    public function getDestinationAttribute(): string
+    {
+        return $this->attributes['destination'] ?? $this->attributes['destination_city'] ?? 'Surabaya';
+    }
+
+    public function getOriginAttribute(): string
+    {
+        return $this->attributes['origin'] ?? $this->attributes['departure_city'] ?? 'Jakarta';
+    }
+
+    public function getTicketCostAttribute(): float
+    {
+        return (float) ($this->attributes['actual_ticket_cost'] ?? $this->attributes['estimated_transport'] ?? 0);
+    }
+
+    public function getHotelCostAttribute(): float
+    {
+        return (float) ($this->attributes['actual_hotel_cost'] ?? $this->attributes['estimated_hotel'] ?? 0);
+    }
+
+    public function getAllowanceCostAttribute(): float
+    {
+        return (float) ($this->attributes['estimated_per_diem'] ?? 0);
+    }
+
+    public function getOtherCostAttribute(): float
+    {
+        return (float) ($this->attributes['estimated_other'] ?? 0);
+    }
+
+    public function getTotalBudgetAttribute(): float
+    {
+        return (float) ($this->attributes['total_estimated_budget'] ?? 0);
+    }
+
+    public function getCashAdvanceAmountAttribute(): float
+    {
+        return (float) ($this->attributes['cash_advance_requested'] ?? 0);
+    }
+
+    public function getNeedCashAdvanceAttribute(): bool
+    {
+        return ((float) ($this->attributes['cash_advance_requested'] ?? 0)) > 0;
+    }
+
+    public function getCheckedInAtAttribute()
+    {
+        return $this->checkin_at;
+    }
+
+    public function getCashAdvancePaidAtAttribute()
+    {
+        return $this->cash_advance_disbursed_at;
+    }
+
+    public function getIsBookedAttribute(): bool
+    {
+        return ! empty($this->attributes['pnr_code']);
+    }
+
+    public function getDepartureAirlineAttribute(): ?string
+    {
+        return $this->attributes['operator_name'] ?? null;
+    }
+
+    public function getDeparturePnrAttribute(): ?string
+    {
+        return $this->attributes['pnr_code'] ?? null;
+    }
+
+    public function getDepartureFlightCodeAttribute(): ?string
+    {
+        return $this->attributes['flight_departure_info'] ?? null;
+    }
+
+    public function getReturnFlightCodeAttribute(): ?string
+    {
+        return $this->attributes['flight_return_info'] ?? null;
+    }
+
+    public function getReturnPnrAttribute(): ?string
+    {
+        return $this->attributes['pnr_code'] ?? null;
+    }
+
+    public function getHotelBookingCodeAttribute(): ?string
+    {
+        return $this->attributes['hotel_confirmation_code'] ?? null;
+    }
+
+    public function getSupportingDocumentAttribute(): ?string
+    {
+        return $this->attributes['invitation_file_path'] ?? null;
+    }
+
+    public function getSupportingDocumentNameAttribute(): string
+    {
+        return ! empty($this->attributes['invitation_file_path'])
+            ? basename($this->attributes['invitation_file_path'])
+            : 'Surat_Tugas_Dinas.pdf';
+    }
+
+    public function getApprovalLevelAttribute(): int
+    {
+        return (int) ($this->attributes['current_approval_level'] ?? 1);
+    }
+
+    public function getCurrentApproverIdAttribute(): ?int
+    {
+        return isset($this->attributes['approver_id']) ? (int) $this->attributes['approver_id'] : null;
+    }
+
+    public function getRevisionNoteAttribute(): ?string
+    {
+        return $this->attributes['revision_notes'] ?? null;
+    }
+
+    public function getDisbursementRefAttribute(): ?string
+    {
+        return $this->attributes['cash_advance_ref'] ?? null;
+    }
+
     /**
      * Human readable status label
      */

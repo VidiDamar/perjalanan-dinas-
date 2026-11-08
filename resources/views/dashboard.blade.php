@@ -1,9 +1,13 @@
 <x-app-travel-layout>
     <!-- Flash Notifications -->
     @if(session('success'))
-        <div class="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-xs">
+        <div class="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-2xs">
             <div class="flex items-center gap-2.5">
-                <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[11px]">✓</span>
+                <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                </span>
                 <span>{{ session('success') }}</span>
             </div>
             <button type="button" onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900 font-bold text-sm">&times;</button>
@@ -17,7 +21,7 @@
             <p class="text-sm text-slate-500 font-medium mt-1">Pantau agenda dinas, status persetujuan SPPD, dan pertanggungjawaban biaya Anda.</p>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('requests.create') }}" class="inline-flex items-center gap-2 bg-[#0A2558] hover:bg-[#081c42] text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-xs transition duration-150 active:scale-[0.99]">
+            <a href="{{ route('requests.create') }}" class="inline-flex items-center gap-2 bg-[#0A2558] hover:bg-[#081c42] text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-2xs transition duration-150">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
@@ -28,41 +32,43 @@
 
     <!-- Highlight Card: Perjalanan Terdekat / Agenda Aktif (Real Data) -->
     @if($activeTrip)
-        <div class="bg-gradient-to-r from-[#0A2558] to-[#123b87] rounded-2xl p-6 md:p-7 text-white shadow-md mb-8 relative overflow-hidden">
-            <div class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-white/5 pointer-events-none"></div>
-            <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="bg-[#0A2558] rounded-2xl p-6 md:p-7 text-white border border-slate-800 shadow-sm mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div class="space-y-3">
                     <div class="flex flex-wrap items-center gap-2">
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                             {{ $activeTrip->status_label }}
                         </span>
 
-                        @if($activeTrip->checked_in)
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-white/20 text-emerald-200 border border-white/20">
-                                ✓ Sudah Check-in di {{ $activeTrip->checkin_location }}
+                        @if($activeTrip->checked_in_at)
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-white/15 text-emerald-200 border border-white/20">
+                                <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                Sudah Check-in di {{ $activeTrip->checkin_location }}
                             </span>
                         @endif
                     </div>
 
                     <div>
                         <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
-                            <span>{{ $activeTrip->origin_city }}</span>
+                            <span>{{ $activeTrip->origin ?: 'Jakarta' }}</span>
                             <svg class="w-5 h-5 text-sky-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
-                            <span>{{ $activeTrip->destination_city }}</span>
+                            <span>{{ $activeTrip->destination }}</span>
                         </h2>
                         <p class="text-sm text-sky-100/90 font-medium mt-1">
                             {{ $activeTrip->purpose }}
-                            @if($activeTrip->flight_departure_info)
-                                &bull; {{ $activeTrip->flight_departure_info }}
+                            @if($activeTrip->departure_airline)
+                                &bull; {{ $activeTrip->departure_airline }} ({{ $activeTrip->departure_flight_code }})
                             @endif
                         </p>
                     </div>
 
                     <div class="flex flex-wrap items-center gap-4 text-xs text-sky-200">
-                        <span class="inline-flex items-center gap-1.5">
+                        <span class="inline-flex items-center gap-1.5 tabular-nums">
                             <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
                                 <line x1="16" x2="16" y1="2" y2="6"/>
@@ -72,32 +78,40 @@
                             {{ $activeTrip->start_date->format('d M') }} - {{ $activeTrip->end_date->format('d M Y') }} ({{ $activeTrip->duration_days }} Hari)
                         </span>
 
-                        <span class="inline-flex items-center gap-1.5 font-semibold text-emerald-300">
+                        <span class="inline-flex items-center gap-1.5 font-mono font-semibold text-emerald-300">
                             No. SPPD: {{ $activeTrip->request_number }}
                         </span>
 
-                        @if($activeTrip->cash_advance_requested > 0)
-                            <span class="inline-flex items-center gap-1 text-sky-100">
-                                💰 Kasbon: Rp {{ number_format($activeTrip->cash_advance_requested, 0, ',', '.') }}
+                        @if($activeTrip->cash_advance_amount > 0)
+                            <span class="inline-flex items-center gap-1.5 text-sky-100 tabular-nums">
+                                <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <rect width="20" height="14" x="2" y="5" rx="2" />
+                                    <line x1="2" x2="22" y1="10" y2="10" />
+                                </svg>
+                                Kasbon: Rp {{ number_format($activeTrip->cash_advance_amount, 0, ',', '.') }}
                             </span>
                         @endif
                     </div>
                 </div>
 
                 <div class="flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0">
-                    <a href="{{ route('requests.show', $activeTrip->request_number) }}" class="inline-flex items-center justify-center gap-2 bg-white text-[#0A2558] hover:bg-slate-100 font-bold text-xs py-2.5 px-4 rounded-xl transition shadow-xs">
+                    <a href="{{ route('requests.show', $activeTrip->request_number) }}" class="inline-flex items-center justify-center gap-2 bg-white text-[#0A2558] hover:bg-slate-100 font-bold text-xs py-2.5 px-4 rounded-xl transition shadow-2xs">
                         <span>Lihat Tiket & Detail Perjalanan</span>
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
                     </a>
 
-                    @if(! $activeTrip->checked_in && in_array($activeTrip->status, ['approved', 'ticket_issued']))
+                    @if(! $activeTrip->checked_in && in_array($activeTrip->status, ['approved', 'ticket_issued', 'booked']))
                         <form action="{{ route('requests.checkin', $activeTrip->request_number) }}" method="POST">
                             @csrf
-                            <input type="hidden" name="location" value="{{ $activeTrip->hotel_name ?? $activeTrip->destination_city }}">
-                            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs py-2 px-4 rounded-xl transition shadow-xs">
-                                <span>📍 Check-in di Lokasi Tujuan</span>
+                            <input type="hidden" name="location" value="{{ $activeTrip->hotel_name ?? $activeTrip->destination }}">
+                            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 px-4 rounded-xl transition shadow-2xs">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                </svg>
+                                <span>Check-in di Lokasi Tujuan</span>
                             </button>
                         </form>
                     @endif
@@ -110,13 +124,15 @@
         </div>
     @else
         <!-- State jika belum ada perjalanan -->
-        <div class="bg-white rounded-2xl border border-slate-200/90 p-8 text-center shadow-xs mb-8">
-            <div class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mx-auto mb-3 text-xl">
-                ✈️
+        <div class="bg-white rounded-2xl border border-slate-200 p-8 text-center shadow-2xs mb-8">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mx-auto mb-3 border border-sky-100">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+                </svg>
             </div>
             <h2 class="text-base font-bold text-slate-800">Belum Ada Agenda Perjalanan Aktif</h2>
             <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-4">Mulai perjalanan dinas Anda dengan mengajukan SPPD baru secara online tanpa berkas kertas.</p>
-            <a href="{{ route('requests.create') }}" class="inline-flex items-center gap-2 bg-[#0A2558] hover:bg-[#081c42] text-white font-semibold text-xs py-2.5 px-4 rounded-xl shadow-xs transition">
+            <a href="{{ route('requests.create') }}" class="inline-flex items-center gap-2 bg-[#0A2558] hover:bg-[#081c42] text-white font-semibold text-xs py-2.5 px-4 rounded-xl shadow-2xs transition">
                 <span>Ajukan Perjalanan Dinas Baru</span>
             </a>
         </div>

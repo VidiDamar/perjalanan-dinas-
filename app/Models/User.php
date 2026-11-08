@@ -32,6 +32,8 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'last_checkin_at' => 'datetime',
+            'birth_date' => 'date',
+            'is_active' => 'boolean',
         ];
     }
 
@@ -51,6 +53,11 @@ class User extends Authenticatable
     public function manager(): BelongsTo
     {
         return $this->belongsTo(self::class, 'manager_id');
+    }
+
+    public function secondApprover(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'second_approver_id');
     }
 
     public function subordinates(): HasMany
@@ -119,6 +126,15 @@ class User extends Authenticatable
      */
     public function getDailyPerDiemLimit(): float
     {
+        try {
+            $policy = TravelPolicy::forJobLevel($this->job_level);
+            if ($policy) {
+                return (float) $policy->per_diem_limit;
+            }
+        } catch (\Throwable) {
+            // Fallback when table is not yet migrated
+        }
+
         return match ($this->job_level) {
             'Staff', 'Junior' => 250000,
             'Senior Specialist', 'Senior' => 300000,
@@ -134,6 +150,15 @@ class User extends Authenticatable
      */
     public function getHotelLimit(): float
     {
+        try {
+            $policy = TravelPolicy::forJobLevel($this->job_level);
+            if ($policy) {
+                return (float) $policy->hotel_limit;
+            }
+        } catch (\Throwable) {
+            // Fallback when table is not yet migrated
+        }
+
         return match ($this->job_level) {
             'Staff', 'Junior' => 500000,
             'Senior Specialist', 'Senior' => 750000,
