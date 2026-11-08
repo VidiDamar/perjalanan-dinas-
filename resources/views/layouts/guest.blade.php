@@ -163,39 +163,11 @@
                         <a href="{{ url('/') }}" class="text-sm font-semibold tracking-tight text-white hover:text-[#ff9e66] transition" x-text="slides[slide].badge">
                             Selected Works
                         </a>
-
-                        <div class="flex items-center gap-4">
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="text-xs font-medium text-white/90 hover:text-white transition">
-                                    Sign Up
-                                </a>
-                            @endif
-                            <a href="{{ url('/') }}" class="rounded-full border border-white/60 hover:border-white px-5 py-1.5 text-xs font-medium text-white hover:bg-white/10 transition">
-                                Join Us
-                            </a>
-                        </div>
                     </div>
 
                     <!-- Bottom Bar Inside Left Panel -->
                     <div class="relative z-10 flex items-center justify-between gap-4 pt-6">
                         <div class="flex items-center gap-3.5">
-                            <!-- Illustrated Character Avatar Circle (Matching Reference Image) -->
-                            <div class="w-11 h-11 rounded-full bg-[#1e90ff] border-2 border-white/25 shadow-lg flex items-center justify-center overflow-hidden shrink-0">
-                                <svg class="w-9 h-9 mt-1" viewBox="0 0 64 64" fill="none">
-                                    <!-- Shoulders / Red Hoodie -->
-                                    <path d="M12 62 C12 48 52 48 52 62" fill="#e63946"/>
-                                    <!-- Neck -->
-                                    <rect x="27" y="40" width="10" height="8" rx="4" fill="#fca387"/>
-                                    <!-- Face -->
-                                    <circle cx="32" cy="29" r="12" fill="#ffbfa8"/>
-                                    <!-- Blonde Stylized Hair -->
-                                    <path d="M19 27 C19 16 28 13 35 14 C42 15 45 20 44 27 C42 22 36 20 30 21 C24 22 21 25 19 27 Z" fill="#ffd166"/>
-                                    <!-- Eyes & Smile -->
-                                    <circle cx="28" cy="28" r="1.5" fill="#1d3557"/>
-                                    <circle cx="36" cy="28" r="1.5" fill="#1d3557"/>
-                                    <path d="M29 34 Q32 37 35 34" stroke="#e63946" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-                                </svg>
-                            </div>
                             <div>
                                 <div class="text-sm font-bold text-white leading-tight" x-text="slides[slide].author">JayaAbadi.ui</div>
                                 <div class="text-xs text-white/75 mt-0.5" x-text="slides[slide].role">UI &amp; Travel Illustration</div>
