@@ -193,7 +193,7 @@
                                 <div data-anim="statistic-item-subtitle" class="body-md color-white-50">/ 4 Grade Jabatan</div>
                             </div>
                             <div class="statistic-item__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6971da641fb15bbf6432e993_statistic-1.webp" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
+                                <img src="images/sppd.png" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
                             </div>
                             <div data-anim="statistic-border-right-1" class="statistic__border statistic__border--right"></div>
                         </div>
@@ -203,7 +203,7 @@
                                 <div data-anim="statistic-item-subtitle" class="body-md color-white-50">/ Otorisasi Berjenjang</div>
                             </div>
                             <div class="statistic-item__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6971da644ade29a121769faf_statistic-2.webp" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
+                                <img src="images/ruangan.png" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
                             </div>
                             <div data-anim="statistic-border-right-2" class="statistic__border statistic__border--right"></div>
                         </div>
@@ -213,7 +213,7 @@
                                 <div data-anim="statistic-item-subtitle" class="body-md color-white-50">/ Settlement Otomatis</div>
                             </div>
                             <div class="statistic-item__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6971da64c60674c148d40058_statistic-3.webp" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
+                                <img src="images/ttd.png" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
                             </div>
                         </div>
                     </div>
@@ -242,7 +242,7 @@
                     </div>
                     <div class="about">
                         <div class="about__visual">
-                            <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6979a5eeee86150be7247f79_illustration-about.jpg" loading="lazy" data-animation="about-illustration" alt="" class="about__illustration"/>
+                            <img src="images/gedung.png" loading="lazy" data-animation="about-illustration" alt="" class="about__illustration"/>
                         </div>
                         <div class="about__content">
                             <div class="about__head">
@@ -909,7 +909,7 @@
                     <div class="practitioners__list mobile-hidden">
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6cc589808c226f0cd7_ea8e8b2e1274331d29db4f187ea3aebb_1.webp" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="images/karyawan1.png" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Ahmad Pegawai</div>
                                     <div class="body-sm">Karyawan (Pemohon)</div>
@@ -943,7 +943,7 @@
 
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6ccb670b10285a47bf_12.webp" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="images/atasan.png" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Budi Santoso</div>
                                     <div class="body-sm">Atasan (Approver)</div>
@@ -977,7 +977,7 @@
 
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6c6400b1ebc3956333_43c66f9116f860d81fe61e822e465e88_10.webp" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="images/admin.png" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Siti Rahma</div>
                                     <div class="body-sm">Admin Travel Desk</div>
@@ -1011,7 +1011,7 @@
 
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6cb4387b1312d7ae14_9.webp" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="images/superadmin.png" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Hendra Wijaya</div>
                                     <div class="body-sm">Finance &amp; Super Admin</div>
@@ -1164,7 +1164,7 @@
                 <div class="container">
                     <div class="footer__in">
                         <div class="footer__visual">
-                            <img loading="eager" src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b6310adee6f369b84c520_illustration.webp" alt="" class="footer__illustration"/>
+                            <img loading="eager" src="images/footer.png" alt="" class="footer__illustration"/>
                             <div class="footer__layer"></div>
                         </div>
                         <div class="footer-top">
