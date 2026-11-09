@@ -30,7 +30,7 @@ class ExampleTest extends TestCase
         $response = $this->get('/login');
 
         $response->assertStatus(200);
-        $response->assertSee('Hi Traveler');
+        $response->assertSee('Hi State official');
         $response->assertSee('Welcome to Jaya Abadi CTMS');
         $response->assertSee('Selected Works');
     }

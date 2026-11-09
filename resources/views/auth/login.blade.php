@@ -1,8 +1,9 @@
 <x-guest-layout>
     <!-- Top Brand & Language Bar (Matching Reference Image) -->
     <div class="flex items-center justify-between">
-        <a href="{{ url('/') }}" class="text-base sm:text-lg font-black tracking-tight text-slate-900 uppercase hover:text-[#eb4634] transition">
-            JAYA ABADI
+        <a href="{{ url('/') }}" class="inline-flex items-center gap-3 text-base sm:text-lg font-black tracking-tight text-slate-900 uppercase hover:text-[#eb4634] transition">
+            <img src="{{ asset('logo_perusahaan.png') }}" alt="Logo" class="w-9 h-9 object-contain">
+            <span>JAYA ABADI</span>
         </a>
     </div>
 

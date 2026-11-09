@@ -10,13 +10,10 @@
 <aside class="w-64 bg-[#F8FAFC] border-r border-slate-200 flex flex-col justify-between shrink-0 min-h-screen p-5 select-none">
     <div class="flex flex-col gap-5">
         <!-- Logo & Brand Header -->
-        <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-1 py-1 group">
-            <div class="w-10 h-10 rounded-lg bg-[#0A2558] text-white flex items-center justify-center p-2 shadow-2xs">
-               <img src="/logo_perusahaan.png" alt="logo" class="max-h-6 object-contain brightness-0 invert" onerror="this.style.display='none'">
-               <span class="font-bold text-xs tracking-wider">CTMS</span>
-            </div>
+        <a href="{{ route('dashboard') }}" class="flex items-center gap-3.5 px-1 py-1 group">
+            <img src="{{ asset('logo_perusahaan.png') }}" alt="Logo PT Jaya Abadi" class="w-12 h-12 object-contain shrink-0 group-hover:scale-105 transition-transform duration-200">
             <div class="flex flex-col">
-                <span class="font-bold text-[16px] text-[#0F2851] tracking-tight leading-snug">PT Jaya Abadi</span>
+                <span class="font-bold text-[16px] text-[#0F2851] tracking-tight leading-snug group-hover:text-blue-900 transition-colors">PT Jaya Abadi</span>
                 <span class="text-[11px] text-slate-500 font-medium leading-none mt-0.5">Enterprise Travel System</span>
             </div>
         </a>

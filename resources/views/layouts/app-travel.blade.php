@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? 'Portal Perjalanan Dinas - Jaya Abadi' }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('logo_perusahaan.png') }}">
 
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
