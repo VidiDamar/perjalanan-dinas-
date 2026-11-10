@@ -193,7 +193,7 @@
                                 <div data-anim="statistic-item-subtitle" class="body-md color-white-50">/ 4 Grade Jabatan</div>
                             </div>
                             <div class="statistic-item__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6971da641fb15bbf6432e993_statistic-1.webp" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
+                                <img src="{{ asset('images/sppd.png') }}" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
                             </div>
                             <div data-anim="statistic-border-right-1" class="statistic__border statistic__border--right"></div>
                         </div>
@@ -203,7 +203,7 @@
                                 <div data-anim="statistic-item-subtitle" class="body-md color-white-50">/ Otorisasi Berjenjang</div>
                             </div>
                             <div class="statistic-item__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6971da644ade29a121769faf_statistic-2.webp" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
+                                <img src="{{ asset('images/ruangan.png') }}" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
                             </div>
                             <div data-anim="statistic-border-right-2" class="statistic__border statistic__border--right"></div>
                         </div>
@@ -213,7 +213,7 @@
                                 <div data-anim="statistic-item-subtitle" class="body-md color-white-50">/ Settlement Otomatis</div>
                             </div>
                             <div class="statistic-item__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6971da64c60674c148d40058_statistic-3.webp" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
+                                <img src="{{ asset('images/ttd.png') }}" loading="lazy" data-anim="statistic-item-illustration" alt="" class="statistic-item__illustration"/>
                             </div>
                         </div>
                     </div>
@@ -242,7 +242,7 @@
                     </div>
                     <div class="about">
                         <div class="about__visual">
-                            <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6979a5eeee86150be7247f79_illustration-about.jpg" loading="lazy" data-animation="about-illustration" alt="" class="about__illustration"/>
+                            <img src="images/gedung.png" loading="lazy" data-animation="about-illustration" alt="" class="about__illustration"/>
                         </div>
                         <div class="about__content">
                             <div class="about__head">
@@ -308,7 +308,7 @@
                                         </div>
                                     </div>
                                     <div class="featured-item__visual mobile-visible">
-                                        <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b0f75d450e622eb69bbb9_1.webp" loading="lazy" alt="" class="featured-item__illustration"/>
+                                        <img src="{{ asset('images/dashboardkaryawan.png') }}" loading="lazy" alt="" class="featured-item__illustration"/>
                                     </div>
                                     <div class="featured-item__body">
                                         <div class="featured-item__properties">
@@ -316,25 +316,25 @@
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">KPI Perjalanan Aktif, Menunggu Approval &amp; Total SPPD</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0cfc7c0ffb4594ddd_200b069e26d5dbf25e7efe28a16ac85b_pin.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardkaryawan.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Form SPPD Cerdas <span class="color-white-60">(Kalkulator Plafon Otomatis)</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d013c40d035e576fc8_calendar.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardkaryawan.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Check-in Lokasi Dinas &amp; Unduh E-SPPD / E-Ticket</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0b38d158447cd2f5b_users.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardkaryawan.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Pelaporan Nota Settlement <span class="color-white-60">&amp; Klaim Reimburse</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b13a6c05aa0554867732d_stars.svg" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
+                                                <img src="{{ asset('images/dashboardkaryawan.png') }}" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
@@ -350,7 +350,7 @@
                                     </div>
                                 </div>
                                 <div class="featured-item__visual mobile-hidden">
-                                    <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b0f75d450e622eb69bbb9_1.webp" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
+                                    <img src="{{ asset('images/dashboardkaryawan.png') }}" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
                                 </div>
                             </div>
 
@@ -365,7 +365,7 @@
                                         </div>
                                     </div>
                                     <div class="featured-item__visual mobile-visible">
-                                        <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b0f759c0200e2421e8d01_2.webp" loading="lazy" alt="" class="featured-item__illustration"/>
+                                        <img src="{{ asset('images/dashboardatasan.png') }}" loading="lazy" alt="" class="featured-item__illustration"/>
                                     </div>
                                     <div class="featured-item__body">
                                         <div class="featured-item__properties">
@@ -373,25 +373,25 @@
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Antrean Persetujuan SPPD Anggota Departemen</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0cfc7c0ffb4594ddd_200b069e26d5dbf25e7efe28a16ac85b_pin.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardatasan.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Audit Plafon Otomatis <span class="color-white-60">(Sesuai / Melebihi Plafon)</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d013c40d035e576fc8_calendar.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardatasan.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Keputusan 3-Aksi: Setujui, Minta Revisi, atau Tolak</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0b38d158447cd2f5b_users.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardatasan.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Pengaturan Delegasi Wewenang <span class="color-white-60">saat Cuti / Dinas</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b13a6c05aa0554867732d_stars.svg" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
+                                                <img src="{{ asset('images/dashboardatasan.png') }}" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
@@ -407,7 +407,7 @@
                                     </div>
                                 </div>
                                 <div class="featured-item__visual mobile-hidden">
-                                    <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b0f759c0200e2421e8d01_2.webp" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
+                                    <img src="{{ asset('images/dashboardatasan.png') }}" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
                                 </div>
                             </div>
 
@@ -423,32 +423,32 @@
                                     </div>
                                     <div class="featured-item__body">
                                         <div class="featured-item__visual mobile-visible">
-                                            <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b0f75e8fb56ed1c7f7c90_3.webp" loading="lazy" alt="" class="featured-item__illustration"/>
+                                            <img src="{{ asset('images/dashboardtravel.png') }}" loading="lazy" alt="" class="featured-item__illustration"/>
                                         </div>
                                         <div class="featured-item__properties">
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Antrean SPPD Disetujui yang Siap Dipesankan Tiket</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0cfc7c0ffb4594ddd_200b069e26d5dbf25e7efe28a16ac85b_pin.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardtravel.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Input Kode Booking PNR <span class="color-white-60">&amp; Nomor E-Ticket</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d013c40d035e576fc8_calendar.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardtravel.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Input Kode Voucher Hotel &amp; Realisasi Biaya Aktual</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0b38d158447cd2f5b_users.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardtravel.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Direktori Mitra Vendor <span class="color-white-60">&amp; Ekspor Katalog CSV</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b13a6c05aa0554867732d_stars.svg" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
+                                                <img src="{{ asset('images/dashboardtravel.png') }}" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
@@ -464,7 +464,7 @@
                                     </div>
                                 </div>
                                 <div class="featured-item__visual mobile-hidden">
-                                    <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b0f75e8fb56ed1c7f7c90_3.webp" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
+                                    <img src="{{ asset('images/dashboardtravel.png') }}"loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
                                 </div>
                             </div>
 
@@ -479,7 +479,7 @@
                                         </div>
                                     </div>
                                     <div class="featured-item__visual mobile-visible">
-                                        <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b0f75cd93fd313dfcc0bd_4.webp" loading="lazy" alt="" class="featured-item__illustration"/>
+                                        <img src="{{ asset('images/dashboardfinance.png') }}"loading="lazy" alt="" class="featured-item__illustration"/>
                                     </div>
                                     <div class="featured-item__body">
                                         <div class="featured-item__properties">
@@ -487,25 +487,25 @@
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Pencairan Uang Muka (Cash Advance) via Transfer Bank</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0cfc7c0ffb4594ddd_200b069e26d5dbf25e7efe28a16ac85b_pin.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardfinance.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Verifikasi Struk &amp; Nota <span class="color-white-60">(Audit Settlement)</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d013c40d035e576fc8_calendar.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardfinance.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Kalkulasi Otomatis Selisih Refund vs Reimburse</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0b38d158447cd2f5b_users.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardfinance.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Laporan Buku Besar <span class="color-white-60">&amp; Ekspor General Ledger CSV</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b13a6c05aa0554867732d_stars.svg" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
+                                                <img src="{{ asset('images/dashboardfinance.png') }}" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
@@ -521,7 +521,7 @@
                                     </div>
                                 </div>
                                 <div class="featured-item__visual mobile-hidden">
-                                    <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b0f75cd93fd313dfcc0bd_4.webp" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
+                                    <img src="{{ asset('images/dashboardfinance.png') }}"loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
                                 </div>
                             </div>
 
@@ -536,7 +536,7 @@
                                         </div>
                                     </div>
                                     <div class="featured-item__visual mobile-visible">
-                                        <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b162748ae928115f5f8ee_5.webp" loading="lazy" alt="" class="featured-item__illustration"/>
+                                        <img src="{{ asset('images/dashboardsuperadmin.png') }}" loading="lazy" alt="" class="featured-item__illustration"/>
                                     </div>
                                     <div class="featured-item__body">
                                         <div class="featured-item__properties">
@@ -544,25 +544,25 @@
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Monitoring Serapan Anggaran Korporat &amp; Radar Lokasi</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0cfc7c0ffb4594ddd_200b069e26d5dbf25e7efe28a16ac85b_pin.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardsuperadmin.png') }}"  loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Master Plafon Hotel &amp; Per Diem <span class="color-white-60">(Grade 1 - 4)</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d013c40d035e576fc8_calendar.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardsuperadmin.png') }}"  loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Manajemen Akun Pegawai &amp; Struktur Hirarki Approval</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0b38d158447cd2f5b_users.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/dashboardsuperadmin.png') }}"  loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Pencatatan Jejak Audit <span class="color-white-60">(Audit Logs &amp; CSV Export)</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b13a6c05aa0554867732d_stars.svg" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
+                                                <img src="{{ asset('images/dashboardsuperadmin.png') }}"  loading="lazy" alt="" class="featured-item-property__icon size-l"/>
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
@@ -578,7 +578,7 @@
                                     </div>
                                 </div>
                                 <div class="featured-item__visual mobile-hidden">
-                                    <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b162748ae928115f5f8ee_5.webp" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
+                                    <img src="{{ asset('images/dashboardsuperadmin.png') }}"  loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
                                 </div>
                             </div>
 
@@ -593,7 +593,7 @@
                                         </div>
                                     </div>
                                     <div class="featured-item__visual mobile-visible">
-                                        <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b16276a09f35cfb31e223_6.webp" loading="lazy" alt="" class="featured-item__illustration"/>
+                                        <img src="{{ asset('images/login.png') }}"  loading="lazy" alt="" class="featured-item__illustration"/>
                                     </div>
                                     <div class="featured-item__body">
                                         <div class="featured-item__properties">
@@ -601,25 +601,25 @@
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Pengalihan Otomatis ke Dashboard Sesuai Jabatan</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0cfc7c0ffb4594ddd_200b069e26d5dbf25e7efe28a16ac85b_pin.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src= "{{ asset('images/login.png') }}"loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Karyawan | Atasan | Travel | Finance <span class="color-white-60">(5 Role)</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d013c40d035e576fc8_calendar.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/login.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Dilengkapi Tombol Quick-Fill Akun Demo</div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b12d0b38d158447cd2f5b_users.svg" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
+                                                <img src="{{ asset('images/login.png') }}" loading="lazy" alt="" class="featured-item-property__icon opacity-20"/>
                                             </div>
                                             <div data-animation="featured-item-property" class="featured-item-property">
                                                 <div class="featured-item-property__title">
                                                     <div class="title-xs">Keamanan Sesi Terproteksi <span class="color-white-60">&amp; Role Switcher</span></div>
                                                 </div>
-                                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b13a6c05aa0554867732d_stars.svg" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
+                                                <img src="{{ asset('images/login.png') }}" loading="lazy" alt="" class="featured-item-property__icon size-l"/>
                                             </div>
                                         </div>
                                         <div data-animation="featured-item-button" class="featured-item__button">
@@ -635,7 +635,7 @@
                                     </div>
                                 </div>
                                 <div class="featured-item__visual mobile-hidden">
-                                    <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b16276a09f35cfb31e223_6.webp" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
+                                    <img src="{{ asset('images/login.png') }}" loading="lazy" data-animation="featured-item-illustration" alt="" class="featured-item__illustration"/>
                                 </div>
                             </div>
 
@@ -909,7 +909,7 @@
                     <div class="practitioners__list mobile-hidden">
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6cc589808c226f0cd7_ea8e8b2e1274331d29db4f187ea3aebb_1.webp" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="{{ asset('images/karyawan1.png') }}" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Ahmad Pegawai</div>
                                     <div class="body-sm">Karyawan (Pemohon)</div>
@@ -943,7 +943,7 @@
 
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6ccb670b10285a47bf_12.webp" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="{{ asset('images/atasan.png') }}" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Budi Santoso</div>
                                     <div class="body-sm">Atasan (Approver)</div>
@@ -977,7 +977,7 @@
 
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6c6400b1ebc3956333_43c66f9116f860d81fe61e822e465e88_10.webp" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="{{ asset('images/admin.png') }}" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Siti Rahma</div>
                                     <div class="body-sm">Admin Travel Desk</div>
@@ -1011,7 +1011,7 @@
 
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6cb4387b1312d7ae14_9.webp" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="{{ asset('images/superadmin.png') }}" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Hendra Wijaya</div>
                                     <div class="body-sm">Finance &amp; Super Admin</div>
@@ -1087,7 +1087,7 @@
                     <div class="practitioners__list mobile-visible">
                         <div class="practitioners-person">
                             <div data-animation="practitioners-illustration-1" class="practitioners-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6cc589808c226f0cd7_ea8e8b2e1274331d29db4f187ea3aebb_1.webp" loading="lazy" alt="" class="practitioners-person__photo"/>
+                                <img src="{{ asset('images/karyawan1.png') }}" loading="lazy" alt="" class="practitioners-person__photo"/>
                                 <div class="practitioners-person__text">
                                     <div data-animation="practitioners-person-title-1" class="body-lg">Ahmad Pegawai</div>
                                     <div data-animation="practitioners-person-description-1" class="body-sm">Karyawan (Pemohon)</div>
@@ -1096,7 +1096,7 @@
                         </div>
                         <div class="practitioners-person">
                             <div data-animation="practitioners-illustration-2" class="practitioners-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6ccb670b10285a47bf_12.webp" loading="lazy" alt="" class="practitioners-person__photo"/>
+                                <img src="{{ asset('images/atasan.png') }}" loading="lazy" alt="" class="practitioners-person__photo"/>
                                 <div class="practitioners-person__text">
                                     <div data-animation="practitioners-person-title-2" class="body-lg">Budi Santoso</div>
                                     <div data-animation="practitioners-person-description-2" class="body-sm">Atasan (Approver)</div>
@@ -1105,7 +1105,7 @@
                         </div>
                         <div class="practitioners-person">
                             <div data-animation="practitioners-illustration-3" class="practitioners-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6c6400b1ebc3956333_43c66f9116f860d81fe61e822e465e88_10.webp" loading="lazy" alt="" class="practitioners-person__photo"/>
+                                <img src="{{ asset('images/admin.png') }}" loading="lazy" alt="" class="practitioners-person__photo"/>
                                 <div class="practitioners-person__text">
                                     <div data-animation="practitioners-person-title-3" class="body-lg">Siti Rahma</div>
                                     <div data-animation="practitioners-person-description-3" class="body-sm">Admin Travel Desk</div>
@@ -1114,7 +1114,7 @@
                         </div>
                         <div class="practitioners-person">
                             <div data-animation="practitioners-illustration-4" class="practitioners-person__visual">
-                                <img src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69897f6cb4387b1312d7ae14_9.webp" loading="lazy" alt="" class="practitioners-person__photo"/>
+                                <img src="{{ asset('images/superadmin.png') }}" loading="lazy" alt="" class="practitioners-person__photo"/>
                                 <div class="practitioners-person__text">
                                     <div data-animation="practitioners-person-title-4" class="body-lg">Hendra Wijaya</div>
                                     <div data-animation="practitioners-person-description-4" class="body-sm">Finance &amp; Super Admin</div>
@@ -1164,7 +1164,7 @@
                 <div class="container">
                     <div class="footer__in">
                         <div class="footer__visual">
-                            <img loading="eager" src="https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b6310adee6f369b84c520_illustration.webp" alt="" class="footer__illustration"/>
+                            <img loading="eager" src="images/footer.png" alt="" class="footer__illustration"/>
                             <div class="footer__layer"></div>
                         </div>
                         <div class="footer-top">

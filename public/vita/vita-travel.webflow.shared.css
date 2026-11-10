@@ -2093,7 +2093,7 @@ textarea.w-input, textarea.w-select {
 .intro {
   text-align: center;
   aspect-ratio: 1440 / 922;
-  background-image: url("https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/6971ad259164859152a18667_intro-illustration.webp");
+  background-image: url("/images/workspace.png");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -2573,7 +2573,7 @@ textarea.w-input, textarea.w-select {
 
 .combine {
   aspect-ratio: 1440 / 863;
-  background-image: url("https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/697b1f5e0aeba6bb251058df_illustration.webp");
+  background-image: url("/images/workspace.png");
   background-position: 0 0;
   background-size: cover;
   padding-top: 5rem;
@@ -4126,7 +4126,7 @@ textarea.w-input, textarea.w-select {
 }
 
 .footer-made-by__visual {
-  background-image: url("https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/69d918ebba9db173b795b62f_logo.svg");
+  background-image: url("/images/footer.png");
   background-position: 0%;
   background-repeat: no-repeat;
   background-size: .75rem;
@@ -4432,7 +4432,7 @@ textarea.w-input, textarea.w-select {
 
   .combine {
     aspect-ratio: 375 / 765;
-    background-image: url("https://cdn.prod.website-files.com/696eeb61714a6c90a5f18c9e/698b622b74261b36810ef710_combine-mobile.webp");
+    background-image: url("/images/workspace.png");
     background-position: 50% 0;
     background-repeat: no-repeat;
     padding-top: 4rem;
