@@ -93,7 +93,7 @@
                         <span>Antrean Pengajuan</span>
                     </div>
                     <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-emerald-800 bg-emerald-100 rounded-full tabular-nums">
-                        {{ $pendingApprovalCount }} Pending
+                        {{ $pendingApprovalCount }} 
                     </span>
                 </a>
 
@@ -131,7 +131,7 @@
                         <span>Antrean Booking Tiket</span>
                     </div>
                     <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-sky-800 bg-sky-100 rounded-full tabular-nums">
-                        {{ $readyBookingCount }} Siap
+                        {{ $readyBookingCount }} 
                     </span>
                 </a>
 
@@ -171,7 +171,7 @@
                         <span>Pencairan Uang Muka</span>
                     </div>
                     <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-amber-800 bg-amber-100 rounded-full tabular-nums">
-                        {{ $pendingCaCount }} Cair
+                        {{ $pendingCaCount }} 
                     </span>
                 </a>
 
@@ -188,7 +188,7 @@
                         <span>Audit Settlement Nota</span>
                     </div>
                     <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-indigo-800 bg-indigo-100 rounded-full tabular-nums">
-                        {{ $pendingSettlementCount }} Klaim
+                        {{ $pendingSettlementCount }} 
                     </span>
                 </a>
 
@@ -277,7 +277,7 @@
                         <span>Status Persetujuan</span>
                     </div>
                     <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-sky-800 bg-sky-100 rounded-full">
-                        1 Aktif
+                        1
                     </span>
                 </a>
 
@@ -292,7 +292,7 @@
                         <span>Klaim & Settlement</span>
                     </div>
                     <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[11px] font-bold text-amber-800 bg-amber-100 rounded-full">
-                        1 Draf
+                        1
                     </span>
                 </a>
             @endif

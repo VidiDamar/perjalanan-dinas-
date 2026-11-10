@@ -943,7 +943,7 @@
 
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="{{ asset('images/atasan.png') }}" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="{{ asset('images/karyawanbudi.png') }}" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Budi Santoso</div>
                                     <div class="body-sm">Atasan (Approver)</div>
@@ -977,7 +977,7 @@
 
                         <div class="coaches-person">
                             <div class="coaches-person__visual">
-                                <img src="{{ asset('images/admin.png') }}" loading="lazy" alt="" class="coaches-person__photo"/>
+                                <img src="{{ asset('images/karyawansiti.png') }}" loading="lazy" alt="" class="coaches-person__photo"/>
                                 <div class="coaches-person__head">
                                     <div class="body-lg">Siti Rahma</div>
                                     <div class="body-sm">Admin Travel Desk</div>
